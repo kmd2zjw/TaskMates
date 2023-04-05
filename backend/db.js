@@ -7,3 +7,5 @@ export const db = mysql.createConnection({
     database:"kmd2zjw"
 
 })
+
+export default db

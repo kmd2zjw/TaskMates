@@ -1,9 +1,12 @@
 import express from "express";
-import taskRoutes from "./routes/tasks.js"
-import authRoutes from "./routes/auth.js"
-import usersRoutes from "./routes/users.js"
+import mysql from "mysql";
+import db from "./db.js";
+import taskRoutes from "./routes/tasks.js";
+import authRoutes from "./routes/auth.js";
+import usersRoutes from "./routes/users.js";
 
 const app = express()
+//db.connect()
 
 app.use(express.json())
 app.use("/api/tasks", taskRoutes)
