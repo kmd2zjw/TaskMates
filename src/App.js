@@ -4,12 +4,10 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import Home from "./pages/Home";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
+
+import { Home, Login, Profile, Register } from './pages';
+import { Footer, Navbar } from './components';
+import './App.scss';
 
 const Layout = () => {
   return (
@@ -25,14 +23,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout/>,
-    childern: [
+    children: [
       {
         path:"/",
-        element: <Home/>
+        element: <Login/>
       },
       {
-        path:"/profile",
-        element: <Profile/>
+        path:"/home",
+        element: <Home/>
       },
     ]
   },
@@ -49,11 +47,14 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div>
+    <div className="app">
+      <div className="container">
       <RouterProvider router = {router}/>
+      </div>
     </div>
   );
 }
+
 
 
 export default App;
