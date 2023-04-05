@@ -7,7 +7,7 @@ import {
 
 import { Home, Login, Profile, Register } from './pages';
 import { Footer, Navbar } from './components';
-import './App.scss';
+import './style.scss';
 
 const Layout = () => {
   return (
@@ -41,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login/>,
+  },
+  {
+    path: "/profile",
+    element: <Profile/>,
   },
 ]);
 
