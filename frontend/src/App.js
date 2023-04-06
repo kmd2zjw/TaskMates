@@ -1,14 +1,14 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
+  BrowserRouter,
   Outlet,
 } from "react-router-dom";
 
-import { Home, Login, Profile, Register } from './pages';
+import { Home, Login, Profile, Register, Organizations, CreateOrg, } from './pages';
 import { Footer, Navbar } from './components';
 import './style.scss';
-
+/*
 const Layout = () => {
   return (
     <>
@@ -17,13 +17,13 @@ const Layout = () => {
       <Footer/>
     </>
   );
-};
+};*/
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
-    children: [
+    element: <Home/>,
+    /*children: [
       {
         path:"/",
         element: <Login/>
@@ -32,11 +32,15 @@ const router = createBrowserRouter([
         path:"/home",
         element: <Home/>
       },
-    ]
+    ]*/
   },
   {
     path: "/register",
     element: <Register/>,
+  },
+  {
+    path:"/home",
+    element: <Home/>
   },
   {
     path: "/login",
@@ -46,6 +50,14 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <Profile/>,
   },
+  {
+    path: "/organizations",
+    element: <Organizations/>,
+  },
+  {
+    path: "/createorg",
+    element: <CreateOrg/>,
+  }
 ]);
 
 
