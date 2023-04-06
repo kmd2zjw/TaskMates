@@ -11,7 +11,7 @@ const Home = () => {
         <div>HomePage
             <button className="createOrg">
                 Create an Organization! 
-                <Link to="./organizations">Click Here</Link>
+                <Link to="./createorg">Click Here</Link>
             </button>
         </div>
 
