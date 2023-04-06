@@ -1,5 +1,5 @@
 import express from "express";
-import {createOrg, viewOrgs}
+import {createOrg, viewOrgs} from "../controllers/orgs.js";
 const router = express.Router();
 
 router.post("/", createOrg);
