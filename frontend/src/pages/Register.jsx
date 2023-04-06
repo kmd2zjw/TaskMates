@@ -15,16 +15,21 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
+    const handleChange = e => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = async (e) => {
+
+    const handleSubmit = async e => {
         e.preventDefault();
         try {
             await axios.post("/auth/register", inputs);
+            //console.log(inputs)
+            console.log(JSON.stringify(err));
             navigate("/login");
         } catch (err) {
+            console.log(inputs)
+            console.log(err.response.data)
             setError(err.response.data)
         }
     }
