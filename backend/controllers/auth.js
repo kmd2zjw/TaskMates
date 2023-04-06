@@ -5,7 +5,7 @@ export const register = (req, res) => {
     //CHECK EXISTING USER
     const q = "Select * FROM user WHERE email = ?"
 
-    db.query(q, [req.body.email], {err, data} => {
+    db.query(q, [req.body.email], (err,data) => {
         if (err) return res.status(500).json(err);
         if (data.length) return res.status(409).json("User already exists!");
 
