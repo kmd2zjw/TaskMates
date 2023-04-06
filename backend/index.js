@@ -6,7 +6,6 @@ import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
 
 const app = express()
-//db.connect()
 
 app.use(express.json())
 app.use("/api/tasks", taskRoutes)
