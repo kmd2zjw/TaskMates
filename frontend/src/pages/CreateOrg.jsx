@@ -15,7 +15,7 @@ const CreateOrg = () => {
     
         try {
           // state
-            /*?*/ await axios.put(`/org/create`, {
+            /*?*/ await axios.post(`/orgs/create`, {
                 name,
               })
             // : await axios.post(`/org/create`, {

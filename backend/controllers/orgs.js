@@ -9,7 +9,7 @@ export const createOrg = (req, res) =>{
       if (err) return res.status(403).json("Token is not valid!");
   
       const q =
-        "INSERT INTO organizations(`organizationName`) VALUES (?)";
+        "INSERT INTO organization(`groupName`) VALUES (?)";
   
       const values = [
         req.body.name,
@@ -21,6 +21,7 @@ export const createOrg = (req, res) =>{
       });
     });
   };
+
 export const viewOrgs = (req, res) =>{
     const q = "SELECT * FROM organization";
     db.query(q, (err,data)=>{
