@@ -1,4 +1,5 @@
 import {db} from "../db.js"
+import jwt from "jsonwebtoken";
 
 export const createOrg = (req, res) =>{
     const token = req.cookies.access_token;
@@ -13,7 +14,7 @@ export const createOrg = (req, res) =>{
       const values = [
         req.body.name,
       ];
-  
+      console.log(values)
       db.query(q, [values], (err, data) => {
         if (err) return res.status(500).json(err);
         return res.json("Page has been created.");
