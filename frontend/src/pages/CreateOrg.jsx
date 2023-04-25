@@ -1,6 +1,13 @@
 import React, {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import {Navbar} from "../components";
+import Toolbar from "@mui/material/Toolbar";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Input from '@mui/material/Input';
+import Button from "@mui/material/Button";
+import image from "../img/4907157.jpg";
 
 
 const CreateOrg = () => {
@@ -28,19 +35,43 @@ const CreateOrg = () => {
       };
 
     return (
-        <div className='createOrg'>
-            <h1>Create a New Organization!</h1>
-            <form>
-                <input 
-                    type="text" required 
-                    placeholder='Organization Name' 
-                    onChange={(e) => setName(e.target.value)}
-                />
-            <div className="button">
-                <button onClick={handleClick}>Create Organization</button>
-            </div>
-            </form>
-        </div>
+        <Box component="div" style={{
+            backgroundImage:`url(${image})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+        }}
+             sx={{
+                 overflow:'hidden',
+                 height: '100vh',
+                 width: '100vw',
+                 m: '0px'
+             }}>
+            <Navbar></Navbar>
+            <Toolbar />
+            <Box style={{display:"flex",
+                justifyContent:"center",
+                alignItems:"center",
+                minHeight:"80vh",
+                flexDirection:'column',
+                overflow: "hidden",
+            }}>
+
+                <Typography  variant="h4">Create a New Organization</Typography>
+                <form>
+                    <Box sx={{pt: 2}}>
+                        <Input
+                            type="text" required T
+                            placeholder='Organization Name'
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </Box>
+                <Box sx={{pt: 2}} className="button">
+                    <Button variant="outlined" onClick={handleClick}>Create Organization</Button>
+                </Box>
+                </form>
+            </Box>
+        </Box>
     )
 }
 
