@@ -9,30 +9,16 @@ import Input from '@mui/material/Input';
 import Button from "@mui/material/Button";
 import image from "../img/4907157.jpg";
 
-
-const CreateOrg = () => {
+const CreateTask = () => {
     const state = useLocation().state;
-    console.log(state)
     const [name, setName] = useState(state?.name || "");
-
-    const navigate = useNavigate()
-
+    const [description, setDescription] = useState(state?.description || "");
+    const [dueDate, setDueDate] = useState(new Date());
     const handleClick = async (e) => {
-        e.preventDefault();
-    
-        try {
-          // state
-            /*?*/ await axios.post(`/orgs/create`, {
-                name,
-              })
-            // : await axios.post(`/org/create`, {
-            //     name,
-            //   });
-            navigate("/")
-        } catch (err) {
-          console.log(err);
-        }
-      };
+        //TODO
+        console.log(name);
+        console.log(description);
+    };
 
     return (
         <Box>
@@ -46,22 +32,31 @@ const CreateOrg = () => {
                 overflow: "hidden",
             }}>
 
-                <Typography  variant="h4">Create a New Organization</Typography>
+                <Typography  variant="h4">Create a New Task</Typography>
                 <form>
                     <Box sx={{pt: 8}}>
                         <Input
                             type="text" required T
-                            placeholder='Organization Name'
+                            placeholder='Task Name'
                             onChange={(e) => setName(e.target.value)}
                         />
                     </Box>
-                <Box sx={{pt: 2}} className="button">
-                    <Button variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Create Organization</Button>
-                </Box>
+                    <Box sx={{pt: 2}}>
+                        <Input
+                            type="text" required T
+                            placeholder='Task Description'
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </Box>
+
+                    <Box sx={{pt: 2}} className="button">
+                        <Button variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Create Task</Button>
+                    </Box>
                 </form>
             </Box>
         </Box>
     )
+
 }
 
-export default CreateOrg
+export default CreateTask

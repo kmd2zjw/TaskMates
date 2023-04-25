@@ -45,12 +45,20 @@ const Home = () => {
                 minHeight:"80vh",
             }}>
                 <Link to="./createorg">
-                <Button variant="outlined" className="createOrg">
-                        <Typography>
-                            Create Organization
-                        </Typography>
-                </Button>
+                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="createOrg">
+                            <Typography>
+                                Create Organization
+                            </Typography>
+                    </Button>
                 </Link>
+                <Link to="./createtask">
+                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="createOrg">
+                        <Typography>
+                            Create Task
+                        </Typography>
+                    </Button>
+                </Link>
+
             </Box>
         </Box>
 
