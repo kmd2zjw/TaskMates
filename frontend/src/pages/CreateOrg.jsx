@@ -30,21 +30,33 @@ const CreateOrg = () => {
       };
 
     return (
-        <div className='createOrg'>
-            <h1 className="title-text">Create a New Organization</h1>
-            <form className="app__form">
-                <input 
-                    type="text" required 
-                    placeholder='Organization Name'
-                    className="app__input" 
-                    onChange={(e) => setName(e.target.value)}
-                />
-            <div className="app__buttons">
-                <button className="app__button" onClick={handleClick}>
-                  <div className="app__button-text">Create Organization</div></button>
-            </div>
-            </form>
-        </div>
+
+        <Box>
+            <Navbar></Navbar>
+            <Toolbar />
+            <Box style={{display:"flex",
+                justifyContent:"center",
+                alignItems:"center",
+                minHeight:"80vh",
+                flexDirection:'column',
+                overflow: "hidden",
+            }}>
+
+                <Typography  variant="h4">Create a New Organization</Typography>
+                <form>
+                    <Box sx={{pt: 8}}>
+                        <Input
+                            type="text" required T
+                            placeholder='Organization Name'
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </Box>
+                <Box sx={{pt: 2}} className="button">
+                    <Button variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Create Organization</Button>
+                </Box>
+                </form>
+            </Box>
+        </Box>
     )
 }
 

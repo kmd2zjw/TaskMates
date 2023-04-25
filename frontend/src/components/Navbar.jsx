@@ -21,24 +21,6 @@ const Navbar = () => {
 
 
     return (
-        // <div className="navbar">
-        //     <div className="container">
-        //         <div className="logo">logo</div>
-        //         <div className="links">
-        //             <Link className="link" to ="/profile">
-        //                 <h4>Profile</h4>
-        //             </Link>
-        //             <span>Hello, {currentUser?.first_name}</span>
-        //             {currentUser ? (
-        //                 <span onClick={logout}>Logout</span>
-        //                 ) : (
-        //                 <Link className="link" to="/login">
-        //                 Login
-        //                 </Link>
-        //             )}
-        //         </div>
-        //     </div>
-        // </div>
         <Box sx={{ flexGrow: 1}}>
             <ThemeProvider theme={darkTheme}>
                 <AppBar position="fixed" sx={{color: ''}}>

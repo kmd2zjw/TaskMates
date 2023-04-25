@@ -27,8 +27,6 @@ const Home = () => {
     //console.log(currentUser.id)
 
     return (
-        <div>
-            <h2 className="title-text">Plan Tasks Smarter</h2>
             {/* <div className="orgs">
                 {orgs.map((org) => (
                     <div className="org" key={org.groupId}>
@@ -36,15 +34,28 @@ const Home = () => {
                     </div>
                 ))}
             </div> */}
-            <div className="app__buttons">
-            <Link to="./createorg">
-            <button className="app__button">
-                <div className="app__button-text">Create an Organization</div>
-            </button>
-            </Link>
-            </div>
 
-        </div>
+            <Box style={{display:"flex",
+                justifyContent:"center",
+                alignItems:"center",
+                minHeight:"80vh",
+            }}>
+                <Link to="./createorg">
+                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="createOrg">
+                            <Typography>
+                                Create Organization
+                            </Typography>
+                    </Button>
+                </Link>
+                <Link to="./createtask">
+                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="createOrg">
+                        <Typography>
+                            Create Task
+                        </Typography>
+                    </Button>
+                </Link>
+
+            </Box>
 
     )
 }
