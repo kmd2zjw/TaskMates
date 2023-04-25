@@ -4,6 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import {Navbar} from "../components"
 import {AuthContext} from "../context/authContext"
+import {Button} from "@mui/material";
+import Toolbar from '@mui/material/Toolbar';
 
 const Home = () => {
     const [err, setError] = useState(null);
@@ -26,6 +28,7 @@ const Home = () => {
     return (
         <div>
             <Navbar></Navbar>
+            <Toolbar />
             {/* <div className="orgs">
                 {orgs.map((org) => (
                     <div className="org" key={org.groupId}>
@@ -37,7 +40,7 @@ const Home = () => {
                 Create an Organization! 
                 <Link to="./createorg">Click Here</Link>
             </button>
-            
+
         </div>
 
     )
