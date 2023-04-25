@@ -1,11 +1,12 @@
 import React from "react";
+import { AppWrap } from '../Wrapper';
 
 const Organizations = () => {
     return (
-        <div>Organizations
+        <div className='title-text'>Organizations
             This is org page.
         </div>
     )
 }
 
-export default Organizations
+export default AppWrap(Organizations, 'Organizations');

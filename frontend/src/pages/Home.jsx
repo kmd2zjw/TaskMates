@@ -2,10 +2,9 @@ import React, {useContext, useState} from "react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import {Navbar} from "../components"
 import {AuthContext} from "../context/authContext"
 import {Button} from "@mui/material";
-import Toolbar from '@mui/material/Toolbar';
+import { AppWrap } from '../Wrapper';
 
 const Home = () => {
     const [err, setError] = useState(null);
@@ -27,8 +26,7 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar></Navbar>
-            <Toolbar />
+            <h2 className="title-text">Plan Tasks Smarter</h2>
             {/* <div className="orgs">
                 {orgs.map((org) => (
                     <div className="org" key={org.groupId}>
@@ -36,14 +34,17 @@ const Home = () => {
                     </div>
                 ))}
             </div> */}
-            <button className="createOrg">
-                Create an Organization! 
-                <Link to="./createorg">Click Here</Link>
+            <div className="app__buttons">
+            <Link to="./createorg">
+            <button className="app__button">
+                <div className="app__button-text">Create an Organization</div>
             </button>
+            </Link>
+            </div>
 
         </div>
 
     )
 }
 
-export default Home
+export default AppWrap(Home, 'Home');

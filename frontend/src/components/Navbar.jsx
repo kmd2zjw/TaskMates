@@ -43,18 +43,20 @@ const Navbar = () => {
             <ThemeProvider theme={darkTheme}>
                 <AppBar position="fixed" sx={{color: ''}}>
                     <Toolbar variant="dense">
-                        <Box sx={{marginRight: "auto", display: 'flex', flexDirection: 'row',  justifyContent: "flex-end"}}>
+                        <Box sx={{marginRight: "auto", display: 'flex', flexDirection: 'row',  justifyContent: "flex-end", alignItems: 'center'}}>
                             <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
                                 <Link className="link" to ="/"></Link>
                                 <TaskIcon />
                             </IconButton>
-                            <Typography  variant="h6" color="inherit" component="div">
+                            <Link to="../" className="app__button-text" style={{color: 'white'}}>
+                            <Typography variant="h6" color="inherit" component="div">
                                 TaskMates
                             </Typography>
+                            </Link>
                         </Box>
                         <Box style={{margin: 'auto'}}>
                             {currentUser ? (
-                                <Typography>Welcome to TaskMates, {currentUser?.first_name}!</Typography>
+                                <Typography>{currentUser?.first_name}'s TaskMates Dashboard</Typography>
                             ) : (
                                 <Typography>Welcome to TaskMates!</Typography>
                             )}

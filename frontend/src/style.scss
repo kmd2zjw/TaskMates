@@ -1,9 +1,16 @@
 $lightBlue : #36ACD8;
+$primary-background : #464648;
 .app {
     display: flex;
     justify-content: center;
     .container{
-        width: 1024px;
+        width: 100%;
+        min-height: 100vh;
+        background-color: $primary-background;
+        flex-direction: row;
+        justify-content: center;
+        
+        display:flex;
 
         .link {
             text-decoration: none;
@@ -15,11 +22,10 @@ $lightBlue : #36ACD8;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: $lightBlue;
         
             h1 {
                 font-size: 20px;
-                color: black;
+                color: white;
                 margin-bottom: 20px;
             }
         
@@ -73,4 +79,50 @@ $lightBlue : #36ACD8;
             
         }
     }
+}
+
+.title-text{
+    font-weight: 800;
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+
+}
+
+.app__buttons{
+    text-align: center;
+    justify-content: center;
+    margin: 1rem 0 1rem;
+}
+
+.app__input{
+    border-radius: 7px;
+    width: 20rem;
+    height: 2rem;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.app__button{
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: white;
+    cursor: pointer;
+    margin: 0.5rem;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.app__form{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0 1rem;
+}
+
+.app__button-text{
+    text-decoration: none;
+    color: #000;
+    font-weight: 800;
+    cursor: pointer;
 }

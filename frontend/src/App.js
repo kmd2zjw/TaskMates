@@ -7,6 +7,7 @@ import {
 
 import { Home, Login, Profile, Register, Organizations, CreateOrg, } from './pages';
 import { Footer, Navbar } from './components';
+import Toolbar from '@mui/material/Toolbar';
 import './style.scss';
 /*
 const Layout = () => {
