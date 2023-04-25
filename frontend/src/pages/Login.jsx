@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import '../style.scss'
 import { AuthContext } from "../context/authContext";
 
 const Login = () => {
@@ -32,7 +33,7 @@ const Login = () => {
 
     return (
         <div className="auth">
-            <h1>Login</h1>
+            <h1 className="title-text">Login</h1>
             <form>
                 <input  
                     required

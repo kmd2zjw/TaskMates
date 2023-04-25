@@ -2,9 +2,11 @@ import React, {useContext, useState} from "react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import {Navbar} from "../components"
 import {AuthContext} from "../context/authContext"
 import {Button} from "@mui/material";
-import { AppWrap } from '../Wrapper';
+import Toolbar from '@mui/material/Toolbar';
+import {AppWrap} from '../Wrapper';
 
 const Home = () => {
     const [err, setError] = useState(null);
@@ -47,4 +49,4 @@ const Home = () => {
     )
 }
 
-export default AppWrap(Home, 'Home');
+export default AppWrap(Home, 'home');

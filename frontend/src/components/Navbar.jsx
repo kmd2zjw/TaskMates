@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import {useContext} from "react";
 import {Link} from "react-router-dom";
 import {AuthContext} from "../context/authContext"
 import AppBar from '@mui/material/AppBar';
@@ -45,7 +45,6 @@ const Navbar = () => {
                     <Toolbar variant="dense">
                         <Box sx={{marginRight: "auto", display: 'flex', flexDirection: 'row',  justifyContent: "flex-end", alignItems: 'center'}}>
                             <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-                                <Link className="link" to ="/"></Link>
                                 <TaskIcon />
                             </IconButton>
                             <Link to="../" className="app__button-text" style={{color: 'white'}}>
@@ -62,19 +61,22 @@ const Navbar = () => {
                             )}
                         </Box>
                         <Box sx={{marginLeft: "auto", display: 'flex', flexDirection: 'row'}}>
-                                <Button sx={{ color: '#fff' }}>
                                     <Link className="link" to ="/profile">
+                                        <Button sx={{ color: '#fff' }}>
                                         <Typography>Profile</Typography>
+                                        </Button>
                                     </Link>
-                                </Button>
+
                                 {currentUser ? (
-                                    <Button sx={{ color: '#fff' }} onClick={logout}>Logout</Button>
-                                ) : (
-                                    <Button sx={{ color: '#fff' }}>
-                                        <Link className="link" to="/login">
-                                            Login
-                                        </Link>
+                                    <Button sx={{ color: '#fff' }} onClick={logout}>
+                                        <Typography>Logout</Typography>
                                     </Button>
+                                ) : (
+                                        <Link className="link" to="/login">
+                                            <Button sx={{ color: '#fff' }}>
+                                            <Typography>Login</Typography>
+                                            </Button>
+                                        </Link>
                                 )}
                         </Box>
                     </Toolbar>

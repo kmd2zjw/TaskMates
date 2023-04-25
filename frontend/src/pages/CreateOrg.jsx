@@ -4,6 +4,7 @@ import axios from "axios";
 import { AppWrap } from '../Wrapper';
 
 
+
 const CreateOrg = () => {
     const state = useLocation().state;
     console.log(state)
