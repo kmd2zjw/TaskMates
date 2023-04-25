@@ -18,11 +18,18 @@ export const createOrg = (req, res) =>{
         userInfo.id,
       ]
       const q1 = "INSERT INTO in_group(``) VALUES (?)"
-      
+      const q2 = "SELECT groupID from organization where groupName = ?"
+
       db.query(q, [values], (err, data) => {
         if (err) return res.status(500).json(err);
+        db.query(q2, req.body.name, (err1, data) => {
+          if (err1) return res.status(500).json(err1);
+          console.log(data[0])
+          
+        })
         return res.json("Page has been created.");
       });
+
     });
   };
 
