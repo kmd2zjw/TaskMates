@@ -4,8 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import {Navbar} from "../components"
 import {AuthContext} from "../context/authContext"
-import {Button} from "@mui/material";
+import Button from "@mui/material/Button";
 import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import image from "../img/4907157.jpg"
 
 const Home = () => {
     const [err, setError] = useState(null);
@@ -26,7 +29,7 @@ const Home = () => {
     //console.log(currentUser.id)
 
     return (
-        <div>
+        <Box>
             <Navbar></Navbar>
             <Toolbar />
             {/* <div className="orgs">
@@ -36,12 +39,20 @@ const Home = () => {
                     </div>
                 ))}
             </div> */}
-            <button className="createOrg">
-                Create an Organization! 
-                <Link to="./createorg">Click Here</Link>
-            </button>
-
-        </div>
+            <Box style={{display:"flex",
+                justifyContent:"center",
+                alignItems:"center",
+                minHeight:"80vh",
+            }}>
+                <Link to="./createorg">
+                <Button variant="outlined" className="createOrg">
+                        <Typography>
+                            Create Organization
+                        </Typography>
+                </Button>
+                </Link>
+            </Box>
+        </Box>
 
     )
 }
