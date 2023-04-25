@@ -43,7 +43,7 @@ db.query(q, [req.body.email], (err, data) => {
   if (!isPasswordCorrect)
     return res.status(400).json("Wrong username/email or password!");
 
-  const token = jwt.sign({ id: data[0].id }, "jwtkey");
+  const token = jwt.sign({ id: data[0].userID }, "jwtkey");
   const { password, ...other } = data[0];
 
   res

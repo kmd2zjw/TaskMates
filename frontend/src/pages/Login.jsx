@@ -50,7 +50,6 @@ const Login = () => {
                 />
                 <button onClick={handleSubmit}>Login</button>
                 {err && <p>{err}</p>}
-                <p>Failed to login!</p>
                 <span>Don't have an account yet? <Link to ="/register">Register</Link></span>
             </form>
         </div>

@@ -14,6 +14,10 @@ export const createOrg = (req, res) =>{
       const values = [
         req.body.name,
       ];
+      const v1 = [
+        userInfo.id,
+      ]
+      const q1 = "INSERT INTO in_group(``) VALUES (?)"
       
       db.query(q, [values], (err, data) => {
         if (err) return res.status(500).json(err);
