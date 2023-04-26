@@ -2,13 +2,12 @@ import React, {useContext, useState} from "react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import {Navbar} from "../components"
 import {AuthContext} from "../context/authContext"
 import Button from "@mui/material/Button";
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import image from "../img/4907157.jpg"
+import image from "../img/4907157.jpg";
+import { AppWrap } from '../wrapper';
 
 const Home = () => {
     const [err, setError] = useState(null);
@@ -30,8 +29,6 @@ const Home = () => {
 
     return (
         <Box>
-            <Navbar></Navbar>
-            <Toolbar />
             {/* <div className="orgs">
                 {orgs.map((org) => (
                     <div className="org" key={org.groupId}>
@@ -65,4 +62,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default AppWrap(Home, "Home");

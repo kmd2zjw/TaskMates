@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Typography from '@mui/material/Typography';
+import Input from '@mui/material/Input';
+import Button from "@mui/material/Button";
 const Register = () => {
 
     const [inputs, setInputs] = useState({
@@ -36,36 +39,46 @@ const Register = () => {
 
     return (
         <div className="auth">
-            <h1>Register</h1>
+            <Typography variant="h2">Register</Typography>
             <form>
-                <input required type="text"
-                       placeholder='First Name'
-                       name="firstName"
-                       onChange={handleChange}
+                <Input
+                    type="text" required T
+                    placeholder='First Name'
+                    className="app__form-element"
+                    name="firstName"
+                    onChange={handleChange}
                 />
-                <input required type="text"
-                       placeholder='Last Name'
-                       name="lastName"
-                       onChange={handleChange}
+                <Input
+                    type="text" required T
+                    placeholder='Last Name'
+                    className="app__form-element"
+                    name="lastName"
+                    onChange={handleChange}
                 />
-                <input required type="email"
-                       placeholder='Email'
-                       name="email"
-                       onChange={handleChange}
+                <Input
+                    type="text" required T
+                    placeholder='Email'
+                    className="app__form-element"
+                    name="email"
+                    onChange={handleChange}
                 />
-                <input required type="number"
-                       placeholder='Phone Number'
-                       name="phoneNumber"
-                       onChange={handleChange}
+                <Input
+                    type="number" required T
+                    placeholder='Phone Number'
+                    className="app__form-element"
+                    name="phoneNumber"
+                    onChange={handleChange}
                 />
-                <input required type="password"
-                       placeholder='Password'
-                       name="password"
-                       onChange={handleChange}
+                <Input
+                    type="text" required T
+                    placeholder='Password'
+                    className="app__form-element"
+                    name="password"
+                    onChange={handleChange}
                 />
-                <button onClick={handleSubmit}>Register</button>
+                <Button variant='outlined' className="app__form-element" sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleSubmit}>Register</Button>
                 {err && <p>{err}</p>}
-                <span>Already have an account yet? <Link to ="/login">Login</Link></span>
+                <span>Already have an account yet? <Link to="/login" style={{textDecoration: 'none', color:"purple"}}><Typography variant="h5">Login</Typography></Link></span>
             </form>
         </div>
     )

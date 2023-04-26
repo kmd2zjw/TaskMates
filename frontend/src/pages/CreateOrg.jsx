@@ -1,8 +1,7 @@
 import React, {useContext, useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {Navbar} from "../components";
-import Toolbar from "@mui/material/Toolbar";
+import { AppWrap } from '../wrapper';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
@@ -36,8 +35,6 @@ const CreateOrg = () => {
 
     return (
         <Box>
-            <Navbar></Navbar>
-            <Toolbar />
             <Box style={{display:"flex",
                 justifyContent:"center",
                 alignItems:"center",
@@ -64,4 +61,4 @@ const CreateOrg = () => {
     )
 }
 
-export default CreateOrg
+export default AppWrap(CreateOrg, 'CreateOrg');

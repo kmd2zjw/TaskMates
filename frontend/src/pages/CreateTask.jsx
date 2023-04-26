@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {Navbar} from "../components";
-import Toolbar from "@mui/material/Toolbar";
+import { AppWrap } from '../wrapper';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
@@ -22,8 +21,6 @@ const CreateTask = () => {
 
     return (
         <Box>
-            <Navbar></Navbar>
-            <Toolbar />
             <Box style={{display:"flex",
                 justifyContent:"center",
                 alignItems:"center",
@@ -59,4 +56,4 @@ const CreateTask = () => {
 
 }
 
-export default CreateTask
+export default AppWrap(CreateTask, 'CreateTask');

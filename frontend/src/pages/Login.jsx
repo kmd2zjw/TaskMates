@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+import Input from '@mui/material/Input';
+import Typography from '@mui/material/Typography';
+import Button from "@mui/material/Button";
 
 const Login = () => {
     const [inputs, setInputs] = useState({
@@ -30,30 +33,33 @@ const Login = () => {
         }
       };
 
-    return (
+      return (
         <div className="auth">
-            <h1>Login</h1>
-            <form>
-                <input  
-                    required
-                    type="text"
-                    placeholder="email"
-                    name="email"
-                    onChange={handleChange}
-                />
-                <input 
-                    required
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    onChange={handleChange}
-                />
-                <button onClick={handleSubmit}>Login</button>
-                {err && <p>{err}</p>}
-                <span>Don't have an account yet? <Link to ="/register">Register</Link></span>
-            </form>
+          <Typography variant="h2">Login</Typography>
+          <form>
+            <Input
+              type="text" required T
+              placeholder='Email'
+              className="app__form-element"
+              name="email"
+              onChange={handleChange}
+            />
+            <Input
+              type="password" required T
+              placeholder="Password"
+              name="password"
+              className="app__form-element"
+              onChange={handleChange}
+            />
+            <Button variant='outlined' className="app__form-element" sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleSubmit}>Login</Button>
+            {err && <p>{err}</p>}
+            <span><Typography>
+              Don't have an account yet?
+            </Typography> <Link to="/register" style={{textDecoration: 'none', color:"purple"}}><Typography variant="h5">Register</Typography></Link></span>
+          </form>
         </div>
-    )
-}
+      )
+    }
+    
 
 export default Login;

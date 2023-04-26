@@ -9,52 +9,7 @@ $lightBlue : #36ACD8;
             text-decoration: none;
             color: inherit;
         }
-        .auth{
-            display:flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: $lightBlue;
-        
-            h1 {
-                font-size: 20px;
-                color: black;
-                margin-bottom: 20px;
-            }
-        
-            form {
-                display: flex;
-                flex-direction: column;
-                padding: 40px;
-                background-color: white;
-                width: 200px;
-                gap: 17px;
-        
-                input {
-                    padding: 10px;
-                    border:none;
-                    border-bottom: 1px solid gray ;
-                }
-                button {
-                    padding: 10px;
-                    border: none;
-                    background-color: gray;
-                    cursor: pointer;
-                    color: white;
-                }
-                p{
-                    font-size: 14px;
-                    color: red;
-                    text-align: center;
-                }
-        
-                span {
-                    font-size: 14px;
-                    text-align: center;
-                }
-            }
-        }
+    
 
         .navbar{
             .container {
@@ -73,4 +28,53 @@ $lightBlue : #36ACD8;
             
         }
     }
+}
+
+.auth{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    h1 {
+        font-size: 20px;
+        color: black;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+        width: 200px;
+        gap: 17px;
+
+        input {
+            padding: 10px;
+            border:none;
+            border-bottom: 1px solid gray ;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: gray;
+            cursor: pointer;
+            color: white;
+        }
+        p{
+            font-size: 14px;
+            color: red;
+            text-align: center;
+        }
+
+        span {
+            font-size: 14px;
+            text-align: center;
+        }
+    }
+}
+
+.app__form-element{
+    margin: 0.5rem 0 0.5rem;
 }
