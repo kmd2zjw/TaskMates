@@ -3,9 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
+import moment from "moment"
 
 const Organizations = () => {
     const [org, setOrg] = useState({});
+    const [tasks, setTask] = useState([]);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -19,6 +21,8 @@ const Organizations = () => {
         try {
           const res = await axios.get(`/orgs/${orgId}`);
           setOrg(res.data);
+          const res1 = await axios.get(`/tasks/getGroupTasks/${orgId}`);
+          setTask(res1.data);
         } catch (err) {
           console.log(err);
         }
@@ -35,6 +39,15 @@ const Organizations = () => {
             <Link to="./createtask">
                 click here to make a task
             </Link>
+            <h1>GROUP TASKS:</h1>
+            {tasks.map((task) => (
+            <div className="org" key={task.taskID}>
+              <h2>Title: {task.task_name}</h2>
+              <h4>Description: {task.description}</h4>
+              <h4>Due on: {task.due_date}</h4>
+            </div>
+            ))}
+
         </div>
 
     )
