@@ -1,4 +1,4 @@
-$lightBlue : #36ACD8;
+
 .app {
     display: flex;
     justify-content: center;
@@ -75,6 +75,39 @@ $lightBlue : #36ACD8;
     }
 }
 
-.app__form-element{
+.app__section-element{
+    margin: 0.5rem 0 0.5rem !important;
+}
+
+.app__container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.app__org-menu{
     margin: 0.5rem 0 0.5rem;
+    .app__org{
+        justify-content: center;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+}
+
+.title-text{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display:flex;
+}
+
+.app__profile-element{
+    padding: 1rem 0 1rem;
+    text-align: center;
+
 }
