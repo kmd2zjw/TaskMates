@@ -7,16 +7,30 @@ import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
 import Button from "@mui/material/Button";
 import image from "../img/4907157.jpg";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment"
 
 const CreateTask = () => {
     const state = useLocation().state;
     const [name, setName] = useState(state?.name || "");
     const [description, setDescription] = useState(state?.description || "");
     const [dueDate, setDueDate] = useState(new Date());
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const orgId = location.pathname.split("/")[2];
+    
     const handleClick = async (e) => {
-        //TODO
-        console.log(name);
-        console.log(description);
+        e.preventDefault();
+        try {
+            await axios.post(`/tasks/addTask`, {
+                name, description, date: moment(dueDate).format("YYYY-MM-DD HH:mm:ss"), orgId,
+              })
+            navigate(`/orgs/${orgId}`)
+        } catch (err) {
+          console.log(err);
+        }
     };
 
     return (
@@ -45,6 +59,15 @@ const CreateTask = () => {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </Box>
+
+                    <DatePicker
+                        showTimeSelect
+                        dateFormat="MMMM d, yyyy h:mmaa"
+                        selected={dueDate}
+                        selectsStart
+                        minDate = {Date.now()}
+                        onChange={date => setDueDate(date)}
+                    />
 
                     <Box sx={{pt: 2}} className="button">
                         <Button variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Create Task</Button>

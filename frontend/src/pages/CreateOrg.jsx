@@ -31,7 +31,7 @@ const CreateOrg = () => {
         } catch (err) {
           console.log(err);
         }
-      };
+    };
 
     return (
         <Box>

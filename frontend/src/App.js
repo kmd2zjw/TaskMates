@@ -59,7 +59,7 @@ const router = createBrowserRouter([
     element: <CreateOrg/>,
   },
   {
-    path: "/createtask",
+    path: "/orgs/:id/createtask",
     element: <CreateTask/>
   }
 ]);

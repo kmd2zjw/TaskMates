@@ -32,6 +32,9 @@ const Organizations = () => {
             This is org page.
             <div> GroupID: {org.groupID}</div>
             <div> GroupName: {org.groupName}</div>
+            <Link to="./createtask">
+                click here to make a task
+            </Link>
         </div>
 
     )

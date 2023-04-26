@@ -3,6 +3,6 @@ import {addTask} from "../controllers/tasks.js"
 
 const router = express.Router()
 
-router.get("/test1", addTask)
+router.post("/addTask", addTask)
 
 export default router
