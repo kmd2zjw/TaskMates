@@ -51,3 +51,13 @@ export const getGroupTasks = (req, res) =>{
     return res.status(200).json(data);
   });
 }
+
+export const acceptTask = (req, res) =>{
+  const token = req.cookies.access_token;
+  if (!token) return res.status(401).json("Not authenticated!");
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    console.log(req.params.id)
+    const q = "INSERT INTO assigned_to(`taskID`, `userID`) VALUES (?)"
+
+  });
+}
