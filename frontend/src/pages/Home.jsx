@@ -37,21 +37,17 @@ const Home = () => {
                     </div>
                 ))}
             </div> */}
-            <Box style={{display:"flex",
-                justifyContent:"center",
-                alignItems:"center",
-                minHeight:"80vh",
-            }}>
-                <OrgTiles></OrgTiles>
+            <OrgTiles/>
+            <Box className="app__container">
                 <Link to="./createorg">
-                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="createOrg">
+                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element">
                             <Typography>
                                 Create Organization
                             </Typography>
                     </Button>
                 </Link>
                 {/* <Link to="./createtask">
-                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="createOrg">
+                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element">
                         <Typography>
                             Create Task
                         </Typography>
