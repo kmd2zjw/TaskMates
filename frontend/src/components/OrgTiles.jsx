@@ -20,11 +20,13 @@ const OrgTiles = () => {
 
     return (
         <div className="menu">
-          <h1>Orgs you're apart of</h1>
+          <h1>Orgs you're apart of: </h1>
           {orgs.map((org) => (
             <div className="org" key={org.groupID}>
-              <h2>{org.groupID}</h2>
-              <button>Read More</button>
+              <h2>{org.groupName}</h2>
+              <Link className="link" to={`/orgs/${org.groupID}`}>
+                <h2>Click here</h2>
+              </Link>
             </div>
           ))}
         </div>

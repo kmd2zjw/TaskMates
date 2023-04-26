@@ -24,12 +24,16 @@ const Organizations = () => {
         }
       };
       fetchData();
+      console.log(org)
     }, [orgId]);
 
     return (
         <div>Organizations
-            This is org page. {orgId}
+            This is org page.
+            <div> GroupID: {org.groupID}</div>
+            <div> GroupName: {org.groupName}</div>
         </div>
+
     )
 }
 

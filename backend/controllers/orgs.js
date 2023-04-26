@@ -86,26 +86,22 @@ export const viewOrgs = (req, res) =>{
   if (!token) return res.status(401).json("Not authenticated!");
   jwt.verify(token, "jwtkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
-    const q1 = "SELECT * FROM in_group WHERE userID = ?";
-
+    const q1 = "SELECT groupID, groupName FROM in_group NATURAL JOIN organization WHERE userID = ?";
     db.query(q1, [userInfo.id], (err,data)=>{
         if(err) return res.send(err);
-        let temp =[]
-        data.forEach((item, index) => {
-          const q2 = "SELECT * FROM organization WHERE groupID = ?";
-          console.log("here", item.groupID)
-          const id = [item.groupID]
-          db.query(q2, [id], (err1, data1)=>{
-            if(err1) return res.send(err);
-            console.log("data: ", data1[0])
-            temp[index] = data1[0]
-          })
-        })
-        //console.log(data)
-        console.log("final: ", temp)
         return res.status(200).json(data);
         
     });
   });
     
 }
+
+export const getOrg = (req, res) => {
+  const q =
+    "SELECT * FROM organization WHERE groupID = ? ";
+
+  db.query(q, [req.params.id], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(data[0]);
+  });
+};
