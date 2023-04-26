@@ -82,9 +82,30 @@ export const createOrg = (req, res) =>{
   };
 
 export const viewOrgs = (req, res) =>{
-    const q = "SELECT * FROM organization";
-    db.query(q, (err,data)=>{
+  const token = req.cookies.access_token;
+  if (!token) return res.status(401).json("Not authenticated!");
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+    const q1 = "SELECT * FROM in_group WHERE userID = ?";
+
+    db.query(q1, [userInfo.id], (err,data)=>{
         if(err) return res.send(err);
+        let temp =[]
+        data.forEach((item, index) => {
+          const q2 = "SELECT * FROM organization WHERE groupID = ?";
+          console.log("here", item.groupID)
+          const id = [item.groupID]
+          db.query(q2, [id], (err1, data1)=>{
+            if(err1) return res.send(err);
+            console.log("data: ", data1[0])
+            temp[index] = data1[0]
+          })
+        })
+        //console.log(data)
+        console.log("final: ", temp)
         return res.status(200).json(data);
+        
     });
+  });
+    
 }

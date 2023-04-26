@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import image from "../img/4907157.jpg";
 import { AppWrap } from '../wrapper';
+import OrgTiles from "../components/OrgTiles"
 
 const Home = () => {
     const [err, setError] = useState(null);
@@ -41,6 +42,7 @@ const Home = () => {
                 alignItems:"center",
                 minHeight:"80vh",
             }}>
+                <OrgTiles></OrgTiles>
                 <Link to="./createorg">
                     <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="createOrg">
                             <Typography>
