@@ -33,3 +33,21 @@ export const addTask = (req, res) =>{
       });
     });
 }
+
+export const getUserTasks = (req, res) =>{
+    const token = req.cookies.access_token;
+    if (!token) return res.status(401).json("Not authenticated!");
+    jwt.verify(token, "jwtkey", (err, userInfo) => {
+
+    });
+}
+
+export const getGroupTasks = (req, res) =>{
+    const q =
+    "SELECT * FROM group_tasks NATURAL JOIN task WHERE groupID = ? ";
+
+  db.query(q, [req.params.id], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(data);
+  });
+}
