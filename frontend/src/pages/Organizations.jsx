@@ -31,6 +31,14 @@ const Organizations = () => {
       console.log(org)
     }, [orgId]);
 
+    const handleAccept = async ()=>{
+      try {
+        await axios.post(`/tasks/accept`);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     return (
         <div>Organizations
             This is org page.
@@ -45,6 +53,7 @@ const Organizations = () => {
               <h2>Title: {task.task_name}</h2>
               <h4>Description: {task.description}</h4>
               <h4>Due on: {task.due_date}</h4>
+              <button onClick={handleAccept}>Click to accept</button>
             </div>
             ))}
 
