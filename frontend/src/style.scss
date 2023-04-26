@@ -1,37 +1,39 @@
-
 .app {
     display: flex;
     justify-content: center;
-    .container{
+
+    .container {
         width: 1024px;
 
         .link {
             text-decoration: none;
             color: inherit;
         }
-    
 
-        .navbar{
+
+        .navbar {
             .container {
                 padding: 10px 0px;
                 display: flex;
                 justify-content: space-between;
-                .logo{
+
+                .logo {
                     display: flex;
                 }
-                .links{
+
+                .links {
                     display: flex;
                     align-items: center;
                     gap: 10px;
                 }
             }
-            
+
         }
     }
 }
 
-.auth{
-    display:flex;
+.auth {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -52,9 +54,10 @@
 
         input {
             padding: 10px;
-            border:none;
-            border-bottom: 1px solid gray ;
+            border: none;
+            border-bottom: 1px solid gray;
         }
+
         button {
             padding: 10px;
             border: none;
@@ -62,7 +65,8 @@
             cursor: pointer;
             color: white;
         }
-        p{
+
+        p {
             font-size: 14px;
             color: red;
             text-align: center;
@@ -75,21 +79,22 @@
     }
 }
 
-.app__section-element{
+.app__section-element {
     margin: 0.5rem 0 0.5rem !important;
 }
 
-.app__container{
-    display:flex;
+.app__container {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
 }
 
-.app__org-menu{
+.app__org-menu {
     margin: 0.5rem 0 0.5rem;
-    .app__org{
+
+    .app__org {
         justify-content: center;
         display: flex;
         flex: 1;
@@ -99,15 +104,23 @@
     }
 }
 
-.title-text{
+.title-text {
     justify-content: center;
     align-items: center;
     text-align: center;
-    display:flex;
+    display: flex;
 }
 
-.app__profile-element{
+.app__profile-element {
     padding: 1rem 0 1rem;
     text-align: center;
 
+}
+
+.centerElements {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
