@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {Navbar} from "../components";
@@ -7,14 +7,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
 import Button from "@mui/material/Button";
-import image from "../img/4907157.jpg";
+import {AuthContext} from "../context/authContext"
 
 
 const CreateOrg = () => {
+    const { currentUser, logout } = useContext(AuthContext);
     const state = useLocation().state;
-    console.log(state)
     const [name, setName] = useState(state?.name || "");
-
+    const userID = currentUser.userID;
     const navigate = useNavigate()
 
     const handleClick = async (e) => {
@@ -23,7 +23,7 @@ const CreateOrg = () => {
         try {
           // state
             /*?*/ await axios.post(`/orgs/create`, {
-                name,
+                name, userID,
               })
             // : await axios.post(`/org/create`, {
             //     name,

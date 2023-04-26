@@ -15,16 +15,26 @@ export const createOrg = (req, res) =>{
         req.body.name,
       ];
       const v1 = [
-        userInfo.id,
-      ]
-      const q1 = "INSERT INTO in_group(``) VALUES (?)"
-      const q2 = "SELECT groupID from organization where groupName = ?"
+        req.body.userID,
+      ];
+      let groupID = '';
+      const q1 = "INSERT INTO in_group(`userID`, `groupID`) VALUES (?)"
+      const q2 = "SELECT groupID from organization where groupName = ?";
+      const q3 = "INSERT INTO make_admin(`userID`, )"
 
-      db.query(q, [values], (err, data) => {
+      db.query(q, [values], (err, data1) => {
         if (err) return res.status(500).json(err);
-        db.query(q2, req.body.name, (err1, data) => {
+        db.query(q2, [values], (err1, data2) => {
           if (err1) return res.status(500).json(err1);
-          console.log(data[0])
+          console.log(data2[0].groupID);
+          console.log(userInfo.id);
+          const inGroup = [
+              req.body.userID,
+              data2[0].groupID,
+          ];
+          db.query(q1, [inGroup], (err2, data3) => {
+              if (err2) return res.status(500).json(err2)
+          })
           
         })
         return res.json("Page has been created.");
