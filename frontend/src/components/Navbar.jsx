@@ -29,9 +29,14 @@ const Navbar = () => {
                             <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
                                 <TaskIcon />
                             </IconButton>
-                            <Typography  variant="h6" color="inherit" component="div">
-                                TaskMates
-                            </Typography>
+
+                            <Link to="../" className="app__button-text" style={{color: 'white'}}>
+                                <Button sx={{ color: '#fff' }}>
+                                    <Typography  variant="h6" color="inherit" component="div">
+                                        TaskMates
+                                    </Typography>
+                                </Button>
+                            </Link>
                         </Box>
                         <Box style={{margin: 'auto'}}>
                             {currentUser ? (
