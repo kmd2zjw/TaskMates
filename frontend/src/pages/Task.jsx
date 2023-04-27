@@ -30,7 +30,7 @@ const Task = () => {
     const handleAccept = async ()=>{
       try {
         await axios.post(`/tasks/accept/${taskId}`);
-        navigate(`./orgs/${orgId}/`)
+        navigate(`/orgs/${orgId}/`)
       } catch (err) {
         console.log(err);
       }
@@ -38,7 +38,7 @@ const Task = () => {
     const handleDelete = async ()=>{
         try {
           await axios.delete(`/tasks/${taskId}`);
-          //navigate("/")
+          navigate(`/orgs/${orgId}/`)
         } catch (err) {
           console.log(err);
         }
@@ -61,4 +61,4 @@ const Task = () => {
     )
 }
 
-export default Task;
+export default AppWrap(Task, "Task");

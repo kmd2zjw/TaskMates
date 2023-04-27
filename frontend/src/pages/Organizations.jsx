@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AppWrap } from '../wrapper';
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import moment from "moment"
@@ -31,7 +32,7 @@ const Organizations = () => {
     }, [orgId]);
 
     return (
-        <div>Organizations
+        <div className="orgPage">Organizations
             This is org page.
             <div> GroupID: {org.groupID}</div>
             <div> GroupName: {org.groupName}</div>
@@ -39,25 +40,29 @@ const Organizations = () => {
                 click here to make a task
             </Link>
             <h1>GROUP TASKS:</h1>
-            {tasks.map((task) => (
-            <div className="org" key={task.taskID}>
-              <h2>Title: {task.task_name}</h2>
-              <h4>Description: {task.description}</h4>
-              <h4>Due on: {task.due_date}</h4>
-              <button>
-                <Link to={`./task/${task.taskID}`}>
-                    View
-                </Link>
-              </button>
+            <div className="tasks">
+              {tasks.map((task) => (
+              <div className="task" key={task.taskID}>
+                <h2>Title: {task.task_name}</h2>
+                <h4>Description: {task.description}</h4>
+                <h4>Due on: {task.due_date}</h4>
+                <button>
+                 <Link to={`./task/${task.taskID}`}>
+                      View
+                  </Link>
+                </button>
               
               
               
+              </div>
+              ))}
+
             </div>
-            ))}
+            
 
         </div>
 
     )
 }
 
-export default Organizations
+export default AppWrap(Organizations, "Organizations");

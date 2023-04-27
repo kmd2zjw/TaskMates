@@ -38,7 +38,13 @@ export const getUserTasks = (req, res) =>{
     const token = req.cookies.access_token;
     if (!token) return res.status(401).json("Not authenticated!");
     jwt.verify(token, "jwtkey", (err, userInfo) => {
-
+      if (err) return res.status(403).json("Token is not valid!");
+      const q = "SELECT * FROM task INNER JOIN assigned_to ON assigned_to.taskID = task.taskID where userID=?"
+      db.query(q, [userInfo.id], (err, data) => {
+        if (err) return res.status(500).json(err);
+        return res.status(200).json(data);
+      })
+      
     });
 }
 
@@ -56,7 +62,7 @@ export const acceptTask = (req, res) =>{
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated!");
   jwt.verify(token, "jwtkey", (err, userInfo) => {
-    console.log(req.params.id)
+    if (err) return res.status(403).json("Token is not valid!");
     const q = "INSERT INTO assigned_to(`taskID`, `userID`) VALUES (?)"
     const v = [
       req.params.id,
@@ -65,11 +71,9 @@ export const acceptTask = (req, res) =>{
     // db.query(q, [v], (err, data) => {
 
     // })
-    console.log(v)
     db.query(q, [v], (err, data) => {
-      console.log(err)
       if (err) return res.status(500).json(err);
-      return res.status(200);
+      return res.status(200).json("Task accepted");
     })
 
   });
@@ -101,7 +105,7 @@ export const deleteTask = (req, res) =>{
         const q3 = "DELETE FROM group_tasks WHERE taskID=?"
         db.query(q3, [req.params.id], (err, data) => {
           if (err) return res.status(500).json(err);
-          return res.status(200);
+          return res.status(200).json("Task deleted");;
         })
         
       })
