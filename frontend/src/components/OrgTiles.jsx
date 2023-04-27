@@ -22,24 +22,18 @@ const OrgTiles = () => {
 
   return (
     <div className="app__org-menu">
-      <Typography variant="h3">Orgs you're apart of: </Typography>
-      {orgs.map((org) => (
-        <div className="app__org" key={org.groupID}>
-          <Typography variant="h4">{org.groupName}</Typography>
-          <Link className="link" to={`/orgs/${org.groupID}`}>
-            <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element">
-              <Typography variant="h5">Click here to View</Typography>
-            </Button>
-          </Link>
-        </div>
-      ))}
-      <Link to="./createorg">
-                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element">
-                            <Typography>
-                                Create Organization
-                            </Typography>
-                    </Button>
-                </Link>
+      <Typography variant="h3">Your Organizations </Typography>
+      <div className="app__org-container">
+        {orgs.map((org) => (
+          <a href={`/orgs/${org.groupID}`} className="app__org">
+            <Typography variant="h5">{org.groupName}</Typography>
+          </a>
+        ))}
+        <a href={`./createorg`} className="app__org">
+          <div><Typography variant="h5">+</Typography></div>
+          <Typography variant="h5">New</Typography>
+        </a>
+      </div>
     </div>
   );
 }

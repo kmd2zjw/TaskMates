@@ -94,14 +94,24 @@
 .app__org-menu {
     margin: 0.5rem 0 0.5rem;
 
-    .app__org {
-        justify-content: center;
+    .app__org-container {
         display: flex;
-        flex: 1;
         align-items: center;
-        text-align: center;
-        flex-direction: column;
         
+        .app__org {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 4px;
+            height: 150px;
+            min-width: 180px;
+            border-radius: 12px;
+            background-color: rgba(255,255,255,0.7);
+            border: 1.5px solid black;
+            text-decoration: none;
+            color: inherit;
+        }
     }
 }
 
