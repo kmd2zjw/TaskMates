@@ -5,6 +5,7 @@ import { AppWrap } from '../wrapper';
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import moment from "moment"
+import { Button } from "@mui/material";
 
 const Organizations = () => {
     const [org, setOrg] = useState({});
@@ -32,36 +33,26 @@ const Organizations = () => {
     }, [orgId]);
 
     return (
-        <div className="orgPage">Organizations
-            This is org page.
-            <div> GroupID: {org.groupID}</div>
-            <div> GroupName: {org.groupName}</div>
-            <Link to="./createtask">
-                click here to make a task
-            </Link>
-            <h1>GROUP TASKS:</h1>
-            <div className="tasks">
-              {tasks.map((task) => (
-              <div className="task" key={task.taskID}>
-                <h2>Title: {task.task_name}</h2>
-                <h4>Description: {task.description}</h4>
-                <h4>Due on: {task.due_date}</h4>
-                <button>
-                 <Link to={`./task/${task.taskID}`}>
-                      View
-                  </Link>
-                </button>
-              
-              
-              
-              </div>
-              ))}
+      <div className="orgPage">
+        <h1>{org.groupName}</h1>
 
-            </div>
-            
-
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <h2>Tasks</h2>
+          <Link to="./createtask">
+            <Button variant='outlined' style={{margin: '14px'}}>New Task</Button>
+          </Link>
         </div>
-
+        
+        <div className="tasks">
+          {tasks.map((task) => (
+          <a href={`./task/${task.taskID}`} className="task" key={task.taskID}>
+            <h2>{task.task_name}</h2>
+            <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
+            <h4 style={{fontWeight: 'normal'}}>Due {task.due_date}</h4>              
+          </a>
+          ))}
+        </div>
+      </div>
     )
 }
 

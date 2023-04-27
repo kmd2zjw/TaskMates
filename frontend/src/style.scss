@@ -1,7 +1,7 @@
 .app {
     //display: flex;
     justify-content: center;
-    padding: 40px;
+    padding: 40px 80px;
 
     .container {
         width: 1024px;
@@ -145,7 +145,15 @@
         justify-content: center;
         flex-direction: column;
         .task{
+            text-decoration: none;
+            color: inherit;
+            width: 50%;
+            box-sizing: border-box;
             padding: 10px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            box-shadow: 0 2px 4px 0px lightgray;
         }
     }
 
