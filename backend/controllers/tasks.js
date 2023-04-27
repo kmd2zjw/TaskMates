@@ -58,6 +58,54 @@ export const acceptTask = (req, res) =>{
   jwt.verify(token, "jwtkey", (err, userInfo) => {
     console.log(req.params.id)
     const q = "INSERT INTO assigned_to(`taskID`, `userID`) VALUES (?)"
+    const v = [
+      req.params.id,
+      userInfo.id,
+    ]
+    // db.query(q, [v], (err, data) => {
+
+    // })
+    console.log(v)
+    db.query(q, [v], (err, data) => {
+      console.log(err)
+      if (err) return res.status(500).json(err);
+      return res.status(200);
+    })
+
+  });
+}
+
+export const getTask = (req, res) =>{
+  const token = req.cookies.access_token;
+  if (!token) return res.status(401).json("Not authenticated!");
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    const q = "SELECT * FROM task WHERE taskID=?"
+    db.query(q, [req.params.id], (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(data);
+    })
+
+  });
+}
+
+export const deleteTask = (req, res) =>{
+  const token = req.cookies.access_token;
+  if (!token) return res.status(401).json("Not authenticated!");
+  jwt.verify(token, "jwtkey", (err1, userInfo) => {
+    const q1 = "DELETE FROM task WHERE taskID=?"
+    db.query(q1, [req.params.id], (err, data) => {
+      if (err1) return res.status(500).json(err);
+      const q2 = "DELETE FROM assigned_to WHERE taskID=?"
+      db.query(q2, [req.params.id], (err, data) => {
+        if (err) return res.status(500).json(err);
+        const q3 = "DELETE FROM group_tasks WHERE taskID=?"
+        db.query(q3, [req.params.id], (err, data) => {
+          if (err) return res.status(500).json(err);
+          return res.status(200);
+        })
+        
+      })
+    })
 
   });
 }
