@@ -17,7 +17,7 @@ root.render(
         }}
              sx={{
                  overflow:'hidden',
-                 height: '100vh',
+                 minHeight: '100vh',
                  width: '100vw',
                  m: '0px'
              }}>

@@ -24,12 +24,18 @@ const Profile = () => {
                 const res2 = await axios.get(`/tasks/getUserTasks`);
 
                 setTasks(res2.data);
+
+
             } catch (err) {
                 console.log(err);
             }
         };
         fetchData();
     });
+
+    const printDate = (dateString) => {
+        return new Date(dateString).toLocaleString();
+    }
 
     return (
         <Box className="app__container" style={{ justifyContent: "flex-start" }}>
@@ -46,11 +52,13 @@ const Profile = () => {
                 <div>
                     <Typography variant="h4" className="app__profile-element"><u>Upcoming Tasks: </u></Typography>
                     <div className="app__org-menu">
+                        <ul>
                         {tasks.map((task) => (
-                            <div>
-                                <Typography variant="h4" className="app__org">{task.task_name} ({task.due_date}), </Typography>
-                            </div>
+                            <li>
+                                <Typography variant="h5" className="app__org">{task.task_name} for {task.groupName}, due {printDate(task.due_date)}</Typography>
+                            </li>
                         ))}
+                        </ul>
                     </div>
 
                     <Typography variant="h4" className="app__profile-element"><u>Currently Involved Organizations: </u></Typography>
