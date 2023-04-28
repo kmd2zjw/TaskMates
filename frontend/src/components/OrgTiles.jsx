@@ -18,7 +18,7 @@ const OrgTiles = () => {
       }
     };
     fetchData();
-  });
+  }, []);
 
   return (
     <div className="app__org-menu">

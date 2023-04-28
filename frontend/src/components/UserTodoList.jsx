@@ -19,7 +19,7 @@ const UserTodoList = () => {
       }
     };
     fetchData();
-  });
+  }, []);
 
   return (
     <div className="UserTodoList">

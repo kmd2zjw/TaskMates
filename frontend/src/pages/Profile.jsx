@@ -31,7 +31,7 @@ const Profile = () => {
             }
         };
         fetchData();
-    });
+    }, []);
 
     const printDate = (dateString) => {
         return new Date(dateString).toLocaleString();
