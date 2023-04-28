@@ -38,8 +38,8 @@ const Home = () => {
                     </div>
                 ))}
             </div> */}
-            <UserTodoList></UserTodoList>
-            <OrgTiles/>
+            <UserTodoList className="app__element"></UserTodoList>
+            <OrgTiles className="app__element"/>
             <Box className="app__container">
                 
             </Box>

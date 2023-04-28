@@ -106,6 +106,10 @@
     }
 }
 
+.app__element{
+    margin: 1rem 0 1rem !important;
+}
+
 .app__org-container {
     display: flex;
     align-items: center;
@@ -182,6 +186,8 @@
 .homepage {
     display: flex;
     padding: 20px;
+    text-align: center;
+    flex-direction: column;
 
     .UserTodoList {
         display: flex;
