@@ -32,6 +32,22 @@ const Organizations = () => {
       fetchData();
     }, [orgId]);
 
+    const downloadTasks = () => {
+      const texts = []
+      tasks.map((task) => {
+        texts.push("Task ID: " + task.taskID + "\n")
+        texts.push("Task name: " + task.task_name + "\n")
+        texts.push("Task Due Date: " + task.due_date + "\n")
+        texts.push("Task description: " + task.description + "\n\n")
+      })
+      const file = new Blob(texts, {type: 'text/plain'})
+      const element = document.createElement("a")
+      element.href = URL.createObjectURL(file)
+      element.download = "tasks" + Date.now() + ".txt"
+      document.body.appendChild(element);
+      element.click()
+    }
+
     return (
       <div className="orgPage">
         <h1>{org.groupName}</h1>
@@ -41,6 +57,7 @@ const Organizations = () => {
           <Link to="./createtask">
             <Button variant='outlined' style={{margin: '14px'}}>New Task</Button>
           </Link>
+          <button onClick={downloadTasks}>Download Tasks</button>
         </div>
         
         <div className="tasks">
