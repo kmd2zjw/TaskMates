@@ -31,7 +31,10 @@ const Profile = () => {
     return (
         <Box className="app__container" style={{ justifyContent: "flex-start" }}>
             {currentUser ? (
-                <Typography variant="h2" className="title-text app__profile-element">{currentUser?.first_name} {currentUser?.last_name}</Typography>
+                <div className="app__org">
+                <Typography variant="h2" style={{paddingBottom: '0rem'}} className="title-text app__profile-element">{currentUser?.first_name} {currentUser?.last_name}</Typography>
+                <Typography variant="h6">User ID: {currentUser?.userID}</Typography>
+                </div>
             ) : (
                 <Typography variant="h2">Please login in order to view profile</Typography>
             )}
@@ -39,6 +42,13 @@ const Profile = () => {
             {currentUser ? (
                 <div>
                     <Typography variant="h4" className="app__profile-element"><u>Upcoming Tasks: </u></Typography>
+                    <div className="app__org-menu">
+                        {orgs.map((org) => (
+                            <div>
+                                <Typography variant="h4" className="app__org">{org.groupName},</Typography>
+                            </div>
+                        ))}
+                    </div>
 
                     <Typography variant="h4" className="app__profile-element"><u>Currently Involved Organizations: </u></Typography>
                     <div className="app__org-menu">

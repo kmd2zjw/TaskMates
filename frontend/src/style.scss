@@ -93,15 +93,15 @@
 
 .app__org-menu {
     margin: 0.5rem 0 0.5rem;
+}
 
-    .app__org {
-        justify-content: center;
-        display: flex;
-        flex: 1;
-        align-items: center;
-        text-align: center;
-        flex-direction: column;
-    }
+.app__org {
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
 }
 
 .title-text {
