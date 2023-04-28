@@ -14,12 +14,16 @@ const Profile = () => {
     const { currentUser, logout } = useContext(AuthContext);
 
     const [orgs, setOrgs] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`/orgs/`);
                 setOrgs(res.data);
+                const res2 = await axios.get(`/tasks/getUserTasks`);
+
+                setTasks(res2.data);
             } catch (err) {
                 console.log(err);
             }
@@ -27,13 +31,12 @@ const Profile = () => {
         fetchData();
     });
 
-
     return (
         <Box className="app__container" style={{ justifyContent: "flex-start" }}>
             {currentUser ? (
-                <div className="app__org">
-                <Typography variant="h2" style={{paddingBottom: '0rem'}} className="title-text app__profile-element">{currentUser?.first_name} {currentUser?.last_name}</Typography>
-                <Typography variant="h6">User ID: {currentUser?.userID}</Typography>
+                <div className="title-section">
+                    <Typography variant="h2" style={{ paddingBottom: '0rem' }} className="title-text app__profile-element">{currentUser?.first_name} {currentUser?.last_name}</Typography>
+                    <Typography variant="h6">User ID: {currentUser?.userID}</Typography>
                 </div>
             ) : (
                 <Typography variant="h2">Please login in order to view profile</Typography>
@@ -43,18 +46,18 @@ const Profile = () => {
                 <div>
                     <Typography variant="h4" className="app__profile-element"><u>Upcoming Tasks: </u></Typography>
                     <div className="app__org-menu">
-                        {orgs.map((org) => (
+                        {tasks.map((task) => (
                             <div>
-                                <Typography variant="h4" className="app__org">{org.groupName},</Typography>
+                                <Typography variant="h4" className="app__org">{task.task_name} ({task.due_date}), </Typography>
                             </div>
                         ))}
                     </div>
 
                     <Typography variant="h4" className="app__profile-element"><u>Currently Involved Organizations: </u></Typography>
-                    <div className="app__org-menu">
+                    <div className="app__profile-org-menu">
                         {orgs.map((org) => (
                             <div>
-                                <Typography variant="h4" className="app__org">{org.groupName},</Typography>
+                                <Typography variant="h4" className="app__profile-org"> {org.groupName}, </Typography>
                             </div>
                         ))}
                     </div>
