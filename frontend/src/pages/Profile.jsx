@@ -54,9 +54,11 @@ const Profile = () => {
                     <div className="app__org-menu">
                         <ul>
                         {tasks.map((task) => (
+                            <a href={`./${task.groupID}/task/${task.taskID}`} className="link" key={task.taskID}>
                             <li>
                                 <Typography variant="h5" className="app__org">{task.task_name} for {task.groupName}, due {printDate(task.due_date)}</Typography>
                             </li>
+                            </a>
                         ))}
                         </ul>
                     </div>
@@ -65,7 +67,9 @@ const Profile = () => {
                     <div className="app__profile-org-menu">
                         {orgs.map((org) => (
                             <div>
-                                <Typography variant="h4" className="app__profile-org"> {org.groupName}, </Typography>
+                            <a href={`/orgs/${org.groupID}`}  className="app__org link">
+                                <Typography style={{color: 'black'}} variant="h4" className="app__profile-org"> {org.groupName}, </Typography>
+                            </a>
                             </div>
                         ))}
                     </div>

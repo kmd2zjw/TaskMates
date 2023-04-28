@@ -46,7 +46,7 @@ const Navbar = () => {
                             )}
                         </Box>
                         <Box sx={{marginLeft: "auto", display: 'flex', flexDirection: 'row'}}>
-                                    <Link className="link" to ="/profile">
+                                    <Link to ="/profile">
                                         <Button sx={{ color: '#fff' }}>
                                         <Typography>Profile</Typography>
                                         </Button>

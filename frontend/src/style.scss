@@ -6,10 +6,6 @@
     .container {
         width: 1024px;
 
-        .link {
-            text-decoration: none;
-            color: inherit;
-        }
 
 
         .navbar {
@@ -30,6 +26,15 @@
             }
 
         }
+    }
+}
+
+.link {
+    text-decoration: none !important;
+    color: inherit;
+
+    :hover {
+        text-decoration: underline !important;
     }
 }
 
