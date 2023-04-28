@@ -1,6 +1,7 @@
 .app {
-    display: flex;
+    //display: flex;
     justify-content: center;
+    padding: 40px 80px;
 
     .container {
         width: 1024px;
@@ -95,14 +96,25 @@
     margin: 0.5rem 0 0.5rem;
 }
 
-.app__org {
-    justify-content: center;
-    display: flex;
-    flex: 1;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-}
+    .app__org-container {
+        display: flex;
+        align-items: center;
+        
+        .app__org {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 4px;
+            height: 150px;
+            min-width: 180px;
+            border-radius: 12px;
+            background-color: rgba(255,255,255,0.7);
+            border: 1.5px solid black;
+            text-decoration: none;
+            color: inherit;
+        }
+    }
 
 .title-text {
     justify-content: center;
@@ -123,4 +135,44 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+.orgPage {
+    display: flex;
+    flex-direction: column;
+    .tasks{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .task{
+            text-decoration: none;
+            color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            box-shadow: 0 2px 4px 0px lightgray;
+        }
+    }
+
+}
+
+
+
+.homepage{
+    display: flex;
+    padding: 20px;
+    
+    .UserTodoList{
+        display: flex;
+        flex-direction: column;
+        padding-right: 40px;
+        .todoTask {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+    }
 }

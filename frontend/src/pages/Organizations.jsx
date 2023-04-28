@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AppWrap } from '../wrapper';
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import moment from "moment"
+import { Button } from "@mui/material";
 
 const Organizations = () => {
     const [org, setOrg] = useState({});
@@ -28,38 +30,30 @@ const Organizations = () => {
         }
       };
       fetchData();
-      console.log(org)
     }, [orgId]);
 
-    const handleAccept = async ()=>{
-      try {
-        await axios.post(`/tasks/accept`);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-
     return (
-        <div>Organizations
-            This is org page.
-            <div> GroupID: {org.groupID}</div>
-            <div> GroupName: {org.groupName}</div>
-            <Link to="./createtask">
-                click here to make a task
-            </Link>
-            <h1>GROUP TASKS:</h1>
-            {tasks.map((task) => (
-            <div className="org" key={task.taskID}>
-              <h2>Title: {task.task_name}</h2>
-              <h4>Description: {task.description}</h4>
-              <h4>Due on: {task.due_date}</h4>
-              <button onClick={handleAccept}>Click to accept</button>
-            </div>
-            ))}
+      <div className="orgPage">
+        <h1>{org.groupName}</h1>
 
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <h2>Tasks</h2>
+          <Link to="./createtask">
+            <Button variant='outlined' style={{margin: '14px'}}>New Task</Button>
+          </Link>
         </div>
-
+        
+        <div className="tasks">
+          {tasks.map((task) => (
+          <a href={`./task/${task.taskID}`} className="task" key={task.taskID}>
+            <h2>{task.task_name}</h2>
+            <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
+            <h4 style={{fontWeight: 'normal'}}>Due {task.due_date}</h4>              
+          </a>
+          ))}
+        </div>
+      </div>
     )
 }
 
-export default Organizations
+export default AppWrap(Organizations, "Organizations");
