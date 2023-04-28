@@ -45,7 +45,7 @@ const Organizations = () => {
         
         <div className="tasks">
           {tasks.map((task) => (
-          <a href={`./task/${task.taskID}`} className="task" key={task.taskID}>
+          <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
             <h2>{task.task_name}</h2>
             <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
             <h4 style={{fontWeight: 'normal'}}>Due {task.due_date}</h4>              
