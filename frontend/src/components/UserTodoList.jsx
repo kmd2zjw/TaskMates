@@ -21,15 +21,19 @@ const UserTodoList = () => {
     fetchData();
   }, []);
 
+  const printDate = (dateString) => {
+    return new Date(dateString).toLocaleString();
+}
+
   return (
     <div className="UserTodoList">
       <Typography variant="h3">Your TODO List: </Typography>
       {tasks.map((task) => (
-        <div className="todoTask" key={task.taskID}>
-          <div className="name">  {task.task_name} </div>
-          <div className="name">  {task.due_date} </div>
-          <div className="name">  {task.description} </div>
-        </div>
+        <Typography  className="todoTask" key={task.taskID}>
+          <Typography  className="name">  <u>{task.task_name}</u> </Typography >
+          <Typography  className="name">  Due: {printDate(task.due_date)} </Typography >
+          <Typography  className="name">  Description: {task.description} </Typography >
+        </Typography >
       ))}
     </div>
   );

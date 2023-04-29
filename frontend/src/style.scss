@@ -38,6 +38,10 @@
     }
 }
 
+.app_task{
+    margin:0.6rem !important;
+}
+
 .auth {
     display: flex;
     flex-direction: column;
@@ -164,17 +168,20 @@
 
 .orgPage {
     display: flex;
+    text-align:center;
     flex-direction: column;
 
     .tasks {
         display: flex;
         justify-content: center;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
 
         .task {
             text-decoration: none;
             color: inherit;
-            width: 50%;
+            width: 40%;
+            margin: 0.5rem;
             box-sizing: border-box;
             padding: 10px;
             background: white;

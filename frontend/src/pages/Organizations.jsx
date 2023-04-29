@@ -5,7 +5,7 @@ import { AppWrap } from '../wrapper';
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import moment from "moment"
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 const Organizations = () => {
     const [org, setOrg] = useState({});
@@ -48,16 +48,26 @@ const Organizations = () => {
       element.click()
     }
 
+    const printDate = (dateString) => {
+      return new Date(dateString).toLocaleString();
+  }
+
     return (
       <div className="orgPage">
-        <h1>{org.groupName}</h1>
+        <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
 
-        <div style={{display: 'flex', alignItems: 'center'}}>
-          <h2>Tasks</h2>
+        <div className="centerElements">
+          <Typography variant='h3'>Tasks</Typography>
           <Link to="./createtask">
-            <Button variant='outlined' style={{margin: '14px'}}>New Task</Button>
+            <Button variant='outlined' className="app_task">New Task</Button>
           </Link>
-          <button onClick={downloadTasks}>Download Tasks</button>
+          <Button variant='outlined' className="app_task" onClick={downloadTasks}>Download Tasks</Button>
+
+          <div>
+          <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show All Tasks</Button>
+          <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show Claimed Tasks</Button>
+          <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show Unclaimed Tasks</Button>
+          </div>
         </div>
         
         <div className="tasks">
@@ -65,7 +75,7 @@ const Organizations = () => {
           <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
             <h2>{task.task_name}</h2>
             <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
-            <h4 style={{fontWeight: 'normal'}}>Due {task.due_date}</h4>              
+            <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              
           </a>
           ))}
         </div>
