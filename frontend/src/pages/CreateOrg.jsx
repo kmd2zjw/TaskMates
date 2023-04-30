@@ -27,7 +27,7 @@ const CreateOrg = () => {
             // : await axios.post(`/org/create`, {
             //     name,
             //   });
-            navigate("/")
+            navigate("/home")
         } catch (err) {
           console.log(err);
         }

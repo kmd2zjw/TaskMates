@@ -28,11 +28,18 @@ const OrgTiles = () => {
           <Typography variant="h4">{org.groupName}</Typography>
           <Link className="link" to={`/orgs/${org.groupID}`}>
             <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element">
-              <Typography variant="h4">Click here</Typography>
+              <Typography variant="h5">Click here to View</Typography>
             </Button>
           </Link>
         </div>
       ))}
+      <Link to="../createorg">
+                    <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element">
+                            <Typography>
+                                Create Organization
+                            </Typography>
+                    </Button>
+                </Link>
     </div>
   );
 }

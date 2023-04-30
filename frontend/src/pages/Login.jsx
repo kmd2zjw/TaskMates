@@ -26,7 +26,7 @@ const Login = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          await login(inputs)
+          await login( inputs)
           navigate("/");
         } catch (err) {
           setError(err.response.data);
@@ -38,14 +38,14 @@ const Login = () => {
           <Typography variant="h2">Login</Typography>
           <form>
             <Input
-              type="text" required T
+              type="text" required
               placeholder='Email'
               className="app__form-element"
               name="email"
               onChange={handleChange}
             />
             <Input
-              type="password" required T
+              type="password" required
               placeholder="Password"
               name="password"
               className="app__form-element"

@@ -5,7 +5,7 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import { Home, Login, Profile, Register, Organizations, CreateOrg, CreateTask } from './pages';
+import { Home, Login, Profile, Register, Organizations, CreateOrg, CreateTask, Task } from './pages';
 import { Footer, Navbar } from './components';
 import './style.scss';
 /*
@@ -60,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: "/orgs/:id/createtask",
     element: <CreateTask/>
+  },
+  {
+    path: "/orgs/:id/task/:tid",
+    element: <Task/>
   }
 ]);
 

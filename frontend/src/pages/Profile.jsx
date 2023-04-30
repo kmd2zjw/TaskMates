@@ -54,6 +54,8 @@ const Profile = () => {
 
                     <Typography variant="h4" className="app__profile-element"><u>Phone Number:</u> {currentUser?.phone_number}</Typography>
 
+                    <Typography variant="h4" className="app__profile-element"><u>User ID:</u> {currentUser?.userID}</Typography>
+
                     <div className="centerElements">
                         <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element" onClick={logout}>
                             <Typography>Logout</Typography>

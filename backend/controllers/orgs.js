@@ -105,3 +105,29 @@ export const getOrg = (req, res) => {
     return res.status(200).json(data[0]);
   });
 };
+
+export const addUserToGroup = (req, res) => {
+  const vals = [
+    req.body.userAdd,
+    req.body.orgId,
+  ];
+  const q = 
+    "INSERT INTO in_group(`userID`, `groupID`) VALUES (?)";
+    
+    db.query(q, [vals], (err, data) => {
+
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(data[0]);
+    });
+};
+
+export const getUsers = (req, res) => {
+  const q = 
+    "SELECT userID, firstName, lastName FROM in_group NATURAL JOIN users WHERE groupID = ?";
+
+    db.query(q, [req.params.id], (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(data[0]);
+    });
+
+};
