@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AppWrap } from '../wrapper';
@@ -66,7 +66,31 @@ const Organizations = () => {
 
     const printDate = (dateString) => {
       return new Date(dateString).toLocaleString();
-  }
+    }
+
+    const readFile = async (e) => { 
+      e.preventDefault() 
+      const reader = new FileReader() 
+      
+      reader.onload = async (e) => { 
+         const text = (e.target.result) 
+         var result = text.split(",").map(function (value) {
+          return value.trim();
+          });
+         alert(result) 
+         let i = 0
+         for (i in result) {
+          let userAdd = result[i]
+          console.log(userAdd)
+          try {
+            await axios.post(`/orgs/${orgId}/addUserToGroup`, {userAdd, orgId,})
+          } catch (err) {
+            console.log(err)
+          }
+         }
+      }; 
+      reader.readAsText(e.target.files[0]) 
+    }
 
     return (
       <div className="orgPage">
@@ -95,7 +119,7 @@ const Organizations = () => {
           </a>
           ))}
         </div>
-        <form>
+        <form className="addUserForm">
                 <Input
                    type="text" required T
                     placeholder='User ID'
@@ -104,6 +128,8 @@ const Organizations = () => {
                 <Button
                   variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add User
                 </Button>
+                <label>Upload .csv to add users: </label>
+                <input type="file" onChange={(e) => readFile(e)} />
 
             </form>
       </div>
