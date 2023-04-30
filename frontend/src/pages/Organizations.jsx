@@ -51,23 +51,44 @@ const Organizations = () => {
     return (
       <div className="orgPage">
         <h1>{org.groupName}</h1>
-
-        <div style={{display: 'flex', alignItems: 'center'}}>
-          <h2>Tasks</h2>
-          <Link to="./createtask">
-            <Button variant='outlined' style={{margin: '14px'}}>New Task</Button>
-          </Link>
-          <button onClick={downloadTasks}>Download Tasks</button>
-        </div>
         
-        <div className="tasks">
-          {tasks.map((task) => (
-          <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
-            <h2>{task.task_name}</h2>
-            <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
-            <h4 style={{fontWeight: 'normal'}}>Due {task.due_date}</h4>              
-          </a>
-          ))}
+        <div style={{ display: 'flex', gap: '100px' }}>
+          <div style={{ flex: '1' }}>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              <h2>Tasks</h2>
+              <Link to="./createtask">
+                <Button variant='outlined' style={{margin: '14px'}}>New Task</Button>
+              </Link>
+              <button onClick={downloadTasks}>Download Tasks</button>
+            </div>
+            
+            <div className="tasks">
+              {tasks.map((task) => (
+              <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
+                <h2>{task.task_name}</h2>
+                <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
+                <h4 style={{fontWeight: 'normal'}}>Due {task.due_date}</h4>              
+              </a>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ flex: '1' }}>
+            <div style={{display: 'flex', alignItems: 'center', margin: '14px 0'}}>
+              <h2>Members</h2>
+            </div>
+            
+            <div className="members" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              {tasks.map((task, idx) => (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '150px', width: '150px', borderRadius: '16px', backgroundColor: 'white', boxSizing: 'border-box', boxShadow: '0 2px 4px 0px lightgray' }}>
+                <div style={{ height: '46px', width: '46px', boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', borderRadius: '16px', border: '1.5px solid cornflowerblue', marginBottom: '4px', marginTop: '-4px' }}>
+                  <span>P{ idx }</span>
+                </div>
+                <h3 style={{ textAlign: 'center' }}>Person { idx }</h3>
+              </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     )
