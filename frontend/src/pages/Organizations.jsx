@@ -92,6 +92,29 @@ const Organizations = () => {
     
   }
 
+  const readFile = async (e) => { 
+    e.preventDefault() 
+    const reader = new FileReader() 
+    reader.onload = async (e) => { 
+       const text = (e.target.result) 
+       var result = text.split(",").map(function (value) {
+        return value.trim();
+      });
+       let i = 0
+       for (i in result) {
+        let userAdd = result[i]
+        try {
+          await axios.post(`/orgs/${orgId}/addUserToGroup`, {
+            userAdd, orgId,
+          })
+        } catch (err) {
+          console.log(err);
+        }
+       }
+    }; 
+    reader.readAsText(e.target.files[0]) 
+ } 
+
   return (
     <div className="orgPage">
       <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
@@ -133,7 +156,7 @@ const Organizations = () => {
           </>
         )}
       </div>
-      <form>
+      <form className="addUserForm">
         <Input
             type="text" required T
             placeholder='User ID'
@@ -142,6 +165,7 @@ const Organizations = () => {
         <Button
           variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add User
         </Button>
+        <input type="file" onChange={(e) => readFile(e)} />
       </form>
     </div>
   )
