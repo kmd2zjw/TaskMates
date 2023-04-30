@@ -5,11 +5,12 @@ import { AppWrap } from '../wrapper';
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import moment from "moment"
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Input } from "@mui/material";
 
 const Organizations = () => {
     const [org, setOrg] = useState({});
     const [tasks, setTask] = useState([]);
+    const [userAdd, setUser] = useState([]);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -31,6 +32,21 @@ const Organizations = () => {
       };
       fetchData();
     }, [orgId]);
+
+    const handleClick = async (e) => {
+      e.preventDefault();
+  
+      try {
+
+        await axios.post(`/orgs/${orgId}/addUserToGroup`, {
+              userAdd, orgId,
+            })
+          navigate(`/orgs/${orgId}`)
+      } catch (err) {
+        console.log(err);
+      }
+  };
+
 
     const downloadTasks = () => {
       const texts = []
@@ -79,6 +95,17 @@ const Organizations = () => {
           </a>
           ))}
         </div>
+        <form>
+                <Input
+                   type="text" required T
+                    placeholder='User ID'
+                    onChange={(e) => setUser(e.target.value)}
+                />
+                <Button
+                  variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add User
+                </Button>
+
+            </form>
       </div>
     )
 }
