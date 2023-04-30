@@ -12,6 +12,7 @@ const Organizations = () => {
   const [tasks, setTask] = useState([]);
   const [filterTasks, setFilterTask] = useState([]);
   const [unfiltered, setUnfiltered] = useState(true);
+  const [userAdd, setUser] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,6 +35,19 @@ const Organizations = () => {
     };
     fetchData();
   }, [orgId]);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`/orgs/${orgId}/addUserToGroup`, {
+        userAdd, orgId,
+      })
+      navigate(`/orgs/${orgId}`)
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     setFilterTask(tasks);
@@ -80,7 +94,7 @@ const Organizations = () => {
 
   return (
     <div className="orgPage">
-      <Typography variant='h2' style={{ fontWeight: 700 }}><u>{org.groupName}</u></Typography>
+      <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
 
       <div className="centerElements">
         <Typography variant='h3'>Tasks</Typography>
@@ -95,16 +109,16 @@ const Organizations = () => {
           <Button variant='outlined' className="app_task" name="unclaimed" id="unclaimed" onClick={reviseTasks}>Show Unclaimed Tasks (Sorted by Date)</Button>
         </div>
       </div>
-
+      
       <div className="tasks">
         {unfiltered ? (
           <>
           {tasks.map((task) => (
-            <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
-              <h2>{task.task_name}</h2>
-              <h4 style={{ fontWeight: 'normal' }}>{task.description}</h4>
-              <h4 style={{ fontWeight: 'normal' }}>Due: {printDate(task.due_date)}</h4>
-            </a>
+          <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
+            <h2>{task.task_name}</h2>
+            <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
+            <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              
+          </a>
           ))}
           </>
         ) : (
@@ -119,6 +133,16 @@ const Organizations = () => {
           </>
         )}
       </div>
+      <form>
+        <Input
+            type="text" required T
+            placeholder='User ID'
+            onChange={(e) => setUser(e.target.value)}
+        />
+        <Button
+          variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add User
+        </Button>
+      </form>
     </div>
   )
 }
