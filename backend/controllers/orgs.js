@@ -120,3 +120,43 @@ export const addUserToGroup = (req, res) => {
       return res.status(200).json(data[0]);
     });
 };
+
+export const getOrgUsers = (req, res) => {
+  const q = "SELECT userID, first_name, last_name, adminID FROM in_group NATURAL JOIN user WHERE groupID = ?";
+
+  db.query(q, [req.params.id], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(data);
+  });
+};
+
+export const makeAdmin = (req, res) => {
+  console.log(req.body)
+  const token = req.cookies.access_token;
+  if (!token) return res.status(401).json("Not authenticated!");
+  jwt.verify(token, "jwtkey", async (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+    
+    const getUser = "SELECT * FROM user WHERE userID = ?";
+    const checkAdministratesGroup = "SELECT * FROM administrates_group WHERE adminID = ? AND groupID = ?";
+    
+    db.query(getUser, [userInfo.id], (err, data) => {
+      if (err) return res.status(500).json(err);
+      if (!data[0].adminID) return res.status(401).json("Not authenticated!");
+      
+      db.query(checkAdministratesGroup, [data[0].adminID, req.body.groupID], (err2, data2) => {
+        if (err2) return res.status(500).json(err2);
+        if (data2.length == 0) {
+          return res.status(401).json("Not authenticated!");
+        }
+        console.log(data2)
+        const makeAdmin = "SET @adminID=?; SET @newUserID=?; CALL grantAdmin(@adminID,@newUserID)"
+        db.query(makeAdmin, [data[0].adminID, req.body.userID], (err3, data3) => {
+          console.log(err3)
+          if (err3) return res.status(500).json(err3);
+          
+        });
+      });
+    });
+  });
+};

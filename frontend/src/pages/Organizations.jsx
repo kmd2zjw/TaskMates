@@ -10,6 +10,7 @@ import { Button, Typography, Input } from "@mui/material";
 const Organizations = () => {
   const [org, setOrg] = useState({});
   const [tasks, setTask] = useState([]);
+  const [members, setMembers] = useState([]);
   const [filterTasks, setFilterTask] = useState([]);
   const [unfiltered, setUnfiltered] = useState(true);
   const [userAdd, setUser] = useState([]);
@@ -28,7 +29,8 @@ const Organizations = () => {
         setOrg(res.data);
         const res1 = await axios.get(`/tasks/getGroupTasks/${orgId}`);
         setTask(res1.data);
-
+        const groupUsers = await axios.get(`/orgs/${orgId}/getUsers`);
+        setMembers(groupUsers.data);
       } catch (err) {
         console.log(err);
       }
@@ -113,52 +115,86 @@ const Organizations = () => {
        }
     }; 
     reader.readAsText(e.target.files[0]) 
- } 
+  }
+
+  const handleMakeAdmin = async (userID) => {
+    console.log(orgId)
+    try {
+      await axios.post(`/orgs/${orgId}/makeAdmin`, {
+        'groupID': orgId,
+        'userID': userID
+      });
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="orgPage">
       <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
 
-      <div className="centerElements">
-        <Typography variant='h3'>Tasks</Typography>
-        <Link to="./createtask">
-          <Button variant='outlined' className="app_task">New Task</Button>
-        </Link>
-        <Button variant='outlined' className="app_task" onClick={downloadTasks}>Download Tasks</Button>
+      <div style={{ display: 'flex', gap: '100px' }}>
+        <div style={{ flex: '1' }}>
+          <div className="centerElements">
+            <Typography variant='h3'>Tasks</Typography>
+            <Link to="./createtask">
+              <Button variant='outlined' className="app_task">New Task</Button>
+            </Link>
+            <Button variant='outlined' className="app_task" onClick={downloadTasks}>Download Tasks</Button>
 
-        <div>
-          <Button variant='outlined' className="app_task" name="all" id="all" onClick={reviseTasks}>Show All Tasks (Sorted by Date)</Button>
-          <Button variant='outlined' className="app_task" name="claimed" id="claimed" onClick={reviseTasks}>Show Claimed Tasks (Sorted by Date)</Button>
-          <Button variant='outlined' className="app_task" name="unclaimed" id="unclaimed" onClick={reviseTasks}>Show Unclaimed Tasks (Sorted by Date)</Button>
+            <div>
+              <Button variant='outlined' className="app_task" name="all" id="all" onClick={reviseTasks}>Show All Tasks (Sorted by Date)</Button>
+              <Button variant='outlined' className="app_task" name="claimed" id="claimed" onClick={reviseTasks}>Show Claimed Tasks (Sorted by Date)</Button>
+              <Button variant='outlined' className="app_task" name="unclaimed" id="unclaimed" onClick={reviseTasks}>Show Unclaimed Tasks (Sorted by Date)</Button>
+            </div>
+          </div>
+          
+          <div className="tasks">
+            {unfiltered ? (
+              <>
+              {tasks.map((task) => (
+              <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
+                <h2>{task.task_name}</h2>
+                <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
+                <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              
+              </a>
+              ))}
+              </>
+            ) : (
+              <>
+              {filterTasks.map((task) => (
+                <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
+                  <h2>{task.task_name}</h2>
+                  <h4 style={{ fontWeight: 'normal' }}>{task.description}</h4>
+                  <h4 style={{ fontWeight: 'normal' }}>Due: {printDate(task.due_date)}</h4>
+                </a>
+              ))}
+              </>
+            )}
+          </div>
+        </div>
+        <div style={{ flex: '1' }}>
+          <div style={{display: 'flex', alignItems: 'center', margin: '14px 0'}}>
+            <h2>Members</h2>
+          </div>
+
+          <div className="members" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            {members.map((member) => (
+            <div key={member.userID} onClick={ () => handleMakeAdmin(member.userID) } style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '150px', width: '150px', borderRadius: '16px', backgroundColor: 'white', boxSizing: 'border-box', boxShadow: '0 2px 4px 0px lightgray', backgroundColor: member.adminID ? 'rgb(255, 251, 237)' : 'white' }}>
+              <div style={{ height: '46px', width: '46px', boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', borderRadius: '16px', border: '1.5px solid cornflowerblue', marginBottom: '4px', marginTop: '-4px' }}>
+                <span>{ member.first_name[0] }{ member.last_name[0] }</span>
+              </div>
+              <h3 style={{ textAlign: 'center', marginTop: '2px' }}>{ member.first_name } { member.last_name }</h3>
+            </div>
+            ))}
+          </div>
         </div>
       </div>
-      
-      <div className="tasks">
-        {unfiltered ? (
-          <>
-          {tasks.map((task) => (
-          <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
-            <h2>{task.task_name}</h2>
-            <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
-            <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              
-          </a>
-          ))}
-          </>
-        ) : (
-          <>
-          {filterTasks.map((task) => (
-            <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
-              <h2>{task.task_name}</h2>
-              <h4 style={{ fontWeight: 'normal' }}>{task.description}</h4>
-              <h4 style={{ fontWeight: 'normal' }}>Due: {printDate(task.due_date)}</h4>
-            </a>
-          ))}
-          </>
-        )}
-      </div>
-      <form className="addUserForm">
+
+      <form className="addUserForm" style={{ marginTop: '24px' }}>
         <Input
-            type="text" required T
+            type="text" required
             placeholder='User ID'
             onChange={(e) => setUser(e.target.value)}
         />

@@ -4,7 +4,8 @@ export const db = mysql.createConnection({
     host: "mysql01.cs.virginia.edu",
     user: "kmd2zjw",
     password: "taskMate4750",
-    database:"kmd2zjw"
+    database:"kmd2zjw",
+    multipleStatements: true
 })
 
 db.connect();
