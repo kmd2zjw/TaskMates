@@ -12,6 +12,7 @@ const Organizations = () => {
   const [tasks, setTask] = useState([]);
   const [filterTasks, setFilterTask] = useState([]);
   const [unfiltered, setUnfiltered] = useState(true);
+  const [userAdd, setUser] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,6 +35,19 @@ const Organizations = () => {
     };
     fetchData();
   }, [orgId]);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`/orgs/${orgId}/addUserToGroup`, {
+        userAdd, orgId,
+      })
+      navigate(`/orgs/${orgId}`)
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     setFilterTask(tasks);
@@ -72,55 +86,59 @@ const Organizations = () => {
 
 
 
-    return (
-      <div className="orgPage">
-        <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
+  return (
+    <div className="orgPage">
+      <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
 
-        <div className="centerElements">
-          <Typography variant='h3'>Tasks</Typography>
-          <Link to="./createtask">
-            <Button variant='outlined' className="app_task">New Task</Button>
-          </Link>
-          <Button variant='outlined' className="app_task" onClick={downloadTasks}>Download Tasks</Button>
+      <div className="centerElements">
+        <Typography variant='h3'>Tasks</Typography>
+        <Link to="./createtask">
+          <Button variant='outlined' className="app_task">New Task</Button>
+        </Link>
+        <Button variant='outlined' className="app_task" onClick={downloadTasks}>Download Tasks</Button>
 
-          <div>
-          <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show All Tasks</Button>
-          <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show Claimed Tasks</Button>
-          <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show Unclaimed Tasks</Button>
-          </div>
+        <div>
+        <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show All Tasks</Button>
+        <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show Claimed Tasks</Button>
+        <Button variant='outlined' className="app_task" onClick={downloadTasks}>Show Unclaimed Tasks</Button>
         </div>
-        
-        <div className="tasks">
-          {unfiltered ? (
-            {tasks.map((task) => (
+      </div>
+      
+      <div className="tasks">
+        {unfiltered ? (
+          <>
+          {tasks.map((task) => (
+          <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
+            <h2>{task.task_name}</h2>
+            <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
+            <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              
+          </a>
+          ))}
+          </>
+        ) : (
+          <>
+          {filterTasks.map((task) => (
             <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
               <h2>{task.task_name}</h2>
-              <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
-              <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              
+              <h4 style={{ fontWeight: 'normal' }}>{task.description}</h4>
+              <h4 style={{ fontWeight: 'normal' }}>Due: {printDate(task.due_date)}</h4>
             </a>
-            ))}
-          ) : (
-            {filterTasks.map((task) => (
-              <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
-                <h2>{task.task_name}</h2>
-                <h4 style={{ fontWeight: 'normal' }}>{task.description}</h4>
-                <h4 style={{ fontWeight: 'normal' }}>Due: {printDate(task.due_date)}</h4>
-              </a>
-            ))}
-          )}
-        </div>
-        <form>
-          <Input
-              type="text" required T
-              placeholder='User ID'
-              onChange={(e) => setUser(e.target.value)}
-          />
-          <Button
-            variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add User
-          </Button>
-        </form>
+          ))}
+          </>
+        )}
       </div>
-    )
+      <form>
+        <Input
+            type="text" required T
+            placeholder='User ID'
+            onChange={(e) => setUser(e.target.value)}
+        />
+        <Button
+          variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add User
+        </Button>
+      </form>
+    </div>
+  )
 }
 
 export default AppWrap(Organizations, "Organizations");
