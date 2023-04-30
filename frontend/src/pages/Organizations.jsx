@@ -61,6 +61,10 @@ const Organizations = () => {
 
   const reviseTasks = (e) => {
     setUnfiltered(false);
+    tasks.sort(function(task1, task2){
+      return Number(new Date(task2.due_date)) - Number(new Date(task1.due_date));
+    }).reverse();
+    console.log(tasks)
     if(e.target.id === "all"){
       setFilterTask(tasks);
     } else if(e.target.id === "claimed"){
@@ -70,7 +74,9 @@ const Organizations = () => {
     }
   }
 
-
+  const sortTasks = (e) => {
+    
+  }
 
   return (
     <div className="orgPage">
@@ -84,9 +90,9 @@ const Organizations = () => {
         <Button variant='outlined' className="app_task" onClick={downloadTasks}>Download Tasks</Button>
 
         <div>
-          <Button variant='outlined' className="app_task" name="all" id="all" onClick={reviseTasks}>Show All Tasks</Button>
-          <Button variant='outlined' className="app_task" name="claimed" id="claimed" onClick={reviseTasks}>Show Claimed Tasks</Button>
-          <Button variant='outlined' className="app_task" name="unclaimed" id="unclaimed" onClick={reviseTasks}>Show Unclaimed Tasks</Button>
+          <Button variant='outlined' className="app_task" name="all" id="all" onClick={reviseTasks}>Show All Tasks (Sorted by Date)</Button>
+          <Button variant='outlined' className="app_task" name="claimed" id="claimed" onClick={reviseTasks}>Show Claimed Tasks (Sorted by Date)</Button>
+          <Button variant='outlined' className="app_task" name="unclaimed" id="unclaimed" onClick={reviseTasks}>Show Unclaimed Tasks (Sorted by Date)</Button>
         </div>
       </div>
 
