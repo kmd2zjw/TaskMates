@@ -5,7 +5,7 @@ import { AppWrap } from '../wrapper';
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import moment from "moment"
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Input } from "@mui/material";
 
 const Organizations = () => {
   const [org, setOrg] = useState({});
