@@ -14,18 +14,18 @@ const EditProfile = () => {
 
     const location = useLocation();
     const userID = location.pathname.split("/")[2];
+    const { currentUser, logout, login } = useContext(AuthContext);
 
     const [inputs, setInputs] = useState({
         firstName: "",
         lastName: "",
-        email: "",
+        email: currentUser.email,
         phoneNumber: "",
         password: "",
     });
     const [err, setError] = useState(null);
 
     const navigate = useNavigate();
-    const { currentUser } = useContext(AuthContext);
 
     const handleChange = e => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -38,6 +38,8 @@ const EditProfile = () => {
         try {
             console.log(inputs)
             await axios.post(`/tasks/getUser`, {inputs} );
+            await logout;
+            await login(inputs);
             navigate("/profile");
         } catch (err) {
             //console.log(inputs)
@@ -65,17 +67,18 @@ const EditProfile = () => {
                     onChange={handleChange}
                 />
                 <Input
-                    type="text" required
-                    placeholder='Email'
-                    className="app__form-element"
-                    name="email"
-                    onChange={handleChange}
-                />
-                <Input
                     type="number" required
                     placeholder='Phone Number'
                     className="app__form-element"
                     name="phoneNumber"
+                    onChange={handleChange}
+                />
+                <Typography variant="h5" style={{marginTop: '1rem'}}>Input Password to Confirm Changes</Typography>
+                <Input
+                    type="password" required
+                    placeholder='Password'
+                    className="app__form-element"
+                    name="password"
                     onChange={handleChange}
                 />
                 <Button variant='outlined' className="app__form-element" sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleSubmit}>Confirm Changes</Button>
