@@ -137,24 +137,31 @@ export const makeAdmin = (req, res) => {
   jwt.verify(token, "jwtkey", async (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
     
-    const getUser = "SELECT * FROM user WHERE userID = ?";
+    const getUser = "SELECT a.userID, b.adminID FROM user a left JOIN make_admin b on a.userID = b.userID WHERE a.userID = ? ";
+    const getAdminId = "SELECT b.adminID FROM user a left JOIN make_admin b on a.userID = b.userID WHERE a.userID = ? ";
     const checkAdministratesGroup = "SELECT * FROM administrates_group WHERE adminID = ? AND groupID = ?";
-    
-    db.query(getUser, [userInfo.id], (err, data) => {
+    console.log(req.body.userID)
+    db.query(getUser, [req.body.userID], (err, data) => {
       if (err) return res.status(500).json(err);
+      console.log("here", data[0].adminID)
       if (!data[0].adminID) return res.status(401).json("Not authenticated!");
-      
-      db.query(checkAdministratesGroup, [data[0].adminID, req.body.groupID], (err2, data2) => {
+      let temp = -1
+      db.query(getAdminId, [userInfo.id], (err, data) => {
+        if (err) return res.status(500).json(err);
+        temp = data[0].adminID
+      })
+      console.log(temp)
+      db.query(checkAdministratesGroup, [temp, req.body.groupID], (err2, data2) => {
         if (err2) return res.status(500).json(err2);
-        if (data2.length == 0) {
+        if (data2.length == null) {
           return res.status(401).json("Not authenticated!");
         }
-        console.log(data2)
+        console.log("here", data2)
         const makeAdmin = "SET @adminID=?; SET @newUserID=?; CALL grantAdmin(@adminID,@newUserID)"
-        db.query(makeAdmin, [data[0].adminID, req.body.userID], (err3, data3) => {
+        db.query(makeAdmin, [data[0].adminID, req.body.groupID], (err3, data3) => {
           console.log(err3)
           if (err3) return res.status(500).json(err3);
-          
+          return res.status(200)
         });
       });
     });

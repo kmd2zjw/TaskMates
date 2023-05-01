@@ -110,6 +110,7 @@ const Organizations = () => {
         }
        }
     }; 
+    window.location.reload();
     reader.readAsText(e.target.files[0]) 
   }
 
@@ -188,6 +189,7 @@ const Organizations = () => {
         <div style={{ flex: '1' }}>
           <div style={{display: 'flex', alignItems: 'center', margin: '14px 0'}}>
             <h2>Members</h2>
+            <h2 style ={{paddingLeft: 30}}>Click to make Admin</h2>
           </div>
 
           <div className="members" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
