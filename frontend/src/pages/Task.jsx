@@ -30,15 +30,16 @@ const Task = () => {
     const handleAccept = async ()=>{
       try {
         await axios.post(`/tasks/accept/${taskId}`);
-        navigate(`/orgs/${orgId}/`)
+        navigate(`/orgs/${orgId}`)
       } catch (err) {
         console.log(err);
+        alert("Task is already taken")
       }
     }
     const handleDelete = async ()=>{
         try {
           await axios.delete(`/tasks/${taskId}`);
-          navigate(`/orgs/${orgId}/`)
+          navigate(`/orgs/${orgId}`)
         } catch (err) {
           console.log(err);
         }
