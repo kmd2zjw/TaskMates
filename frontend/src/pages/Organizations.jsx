@@ -45,7 +45,7 @@ const Organizations = () => {
       await axios.post(`/orgs/${orgId}/addUserToGroup`, {
         userAdd, orgId,
       })
-      navigate(`/orgs/${orgId}`)
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
@@ -133,7 +133,22 @@ const Organizations = () => {
   return (
     <div className="orgPage">
       <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
-
+      <form className="addUserForm" style={{ marginTop: '24px' }}>
+        <Input
+            type="text" required
+            placeholder='User ID'
+            onChange={(e) => setUser(e.target.value)}
+        />
+        <Button
+          variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add Member
+        </Button>
+        
+      </form>
+      <div className = "centerElements">
+        <div>
+       Upload Users: <input type="file" placeholder="Upload Users" onChange={(e) => readFile(e)} />
+        </div>
+      </div>
       <div style={{ display: 'flex', gap: '100px' }}>
         <div style={{ flex: '1' }}>
           <div className="centerElements">
@@ -192,17 +207,7 @@ const Organizations = () => {
         </div>
       </div>
 
-      <form className="addUserForm" style={{ marginTop: '24px' }}>
-        <Input
-            type="text" required
-            placeholder='User ID'
-            onChange={(e) => setUser(e.target.value)}
-        />
-        <Button
-          variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add User
-        </Button>
-        <input type="file" onChange={(e) => readFile(e)} />
-      </form>
+      
     </div>
   )
 }

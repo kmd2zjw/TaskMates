@@ -11,6 +11,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment"
 
+
 const CreateTask = () => {
     const state = useLocation().state;
     const [name, setName] = useState(state?.name || "");
@@ -59,15 +60,17 @@ const CreateTask = () => {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </Box>
-
+                    <div>
+                    <h4 className="datepicker__title" > Due Date: </h4>
                     <DatePicker
                         showTimeSelect
                         dateFormat="MMMM d, yyyy h:mmaa"
+                        label = "Due Date"
                         selected={dueDate}
                         selectsStart
                         minDate = {Date.now()}
                         onChange={date => setDueDate(date)}
-                    />
+                    /></div>
 
                     <Box sx={{pt: 2}} className="button">
                         <Button variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Create Task</Button>

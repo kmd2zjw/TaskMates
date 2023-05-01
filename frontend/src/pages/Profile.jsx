@@ -7,12 +7,13 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/authContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Profile = () => {
 
+    const [post, setPost] = useState({});
     const { currentUser, logout } = useContext(AuthContext);
-
+    const state = useLocation().state;
     const [orgs, setOrgs] = useState([]);
     const [tasks, setTasks] = useState([]);
 
@@ -22,7 +23,6 @@ const Profile = () => {
                 const res = await axios.get(`/orgs/`);
                 setOrgs(res.data);
                 const res2 = await axios.get(`/tasks/getUserTasks`);
-
                 setTasks(res2.data);
 
 
@@ -79,12 +79,18 @@ const Profile = () => {
 
                     <Typography variant="h4" className="app__profile-element"><u>Phone Number:</u> {currentUser?.phone_number}</Typography>
 
+                    <Typography variant="h4" className="app__profile-element"><u>User ID:</u> {currentUser?.userID}</Typography>
+
+                    
                     <div className="centerElements">
                         <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element" onClick={logout}>
                             <Typography>Logout</Typography>
                         </Button>
                     </div>
-                </div>
+                    
+                        
+            </div>
+            
             ) : (
                 <div className="centerElements">
                     <Typography variant="h5" className="app__section-element">*Login using the Login button in the Navbar or the button below</Typography>
