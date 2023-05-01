@@ -115,7 +115,7 @@ export const getTask = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated!");
   jwt.verify(token, "jwtkey", (err, userInfo) => {
-    const q = "SELECT * FROM task WHERE taskID=?"
+    const q = "SELECT * FROM task NATURAL JOIN assigned_to WHERE taskID=?"
     db.query(q, [req.params.id], (err, data) => {
       if (err) return res.status(500).json(err);
       return res.status(200).json(data);

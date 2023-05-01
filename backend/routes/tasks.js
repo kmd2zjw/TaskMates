@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post("/addTask", addTask)
 router.get("/getUserTasks", getUserTasks)
-router.put("/getUser", getUser)
+router.post("/getUser", getUser)
 router.get("/getGroupTasks/:id", getGroupTasks)
 router.get("/getTask/:id", getTask)
 //router.get("/getClaimedTasks/:id", getClaimedTasks)

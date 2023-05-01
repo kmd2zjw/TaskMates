@@ -27,7 +27,7 @@ const Organizations = () => {
       try {
         const res = await axios.get(`/orgs/${orgId}`);
         setOrg(res.data);
-        const res1 = await axios.get(`/tasks/getAllGroupTasks/${orgId}`);
+        const res1 = await axios.get(`/tasks/getGroupTasks/${orgId}`);
         setTask(res1.data);
         const groupUsers = await axios.get(`/orgs/${orgId}/getUsers`);
         setMembers(groupUsers.data);
