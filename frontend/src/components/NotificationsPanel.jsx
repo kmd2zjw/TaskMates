@@ -20,8 +20,8 @@ const NotificationsPanel = () => {
 
   return (
     <div style={{ position: 'absolute', right: 0, height: '400px', width: '340px', backgroundColor: 'white', top: '100%', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'center', padding: '14px', boxSizing: 'border-box', boxShadow: '0 2px 4px 0px lightgray', overflow: 'scroll' }}>
-      {notifications.map(notification => (
-        <div style={{ width: '100%', boxSizing: 'border-box', padding: '6px 10px', backgroundColor: '#eaecf0', borderRadius: '8px', color: 'black', textAlign: 'left' }}>
+      {notifications.map((notification, idx) => (
+        <div key={idx} style={{ width: '100%', boxSizing: 'border-box', padding: '6px 10px', backgroundColor: '#eaecf0', borderRadius: '8px', color: 'black', textAlign: 'left' }}>
           <span style={{ fontWeight: 'bold' }}>{ notification.message }</span>
           <div style={{ display: 'flex', gap: '6px', margin: '6px 4px 4px 2px' }}>
             <div style={{ width: '3px', backgroundColor: 'cornflowerblue', borderRadius: '3px' }}></div>
