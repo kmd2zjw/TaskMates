@@ -15,6 +15,7 @@ const Home = () => {
     const [err, setError] = useState(null);
     const [orgs, setOrgs] = useState([]);
     const { currentUser, logout } = useContext(AuthContext);
+    const location = useLocation();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,17 +32,24 @@ const Home = () => {
 
     return (
         <Box className="homepage">
-            {/* <div className="orgs">
-                {orgs.map((org) => (
-                    <div className="org" key={org.groupId}>
-                        <div>title</div>
-                    </div>
-                ))}
-            </div> */}
+        {currentUser ? (
+            <div>
+            
             <UserTodoList className="app__element"></UserTodoList>
             <OrgTiles className="app__element"/>
+            </div>
+        
+        ) : (
+            
+            <script>
+            {window.location.replace("/login")};
+            </script>
+            
+            
+                
+            
+        )}
         </Box>
-
     )
 }
 

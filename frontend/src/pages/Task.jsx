@@ -10,7 +10,7 @@ const Task = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [task, setTask] = useState([]);
-
+    const {currentUser} = useContext(AuthContext);
     const orgId = location.pathname.split("/")[2];
     const taskId = location.pathname.split("/")[4];
 
@@ -45,6 +45,8 @@ const Task = () => {
       }
     return (
         <div>
+        {currentUser ? (
+          <div>
             {task.map((t) => (
             <div key={t.taskID}> 
                 <h1>Task: {t.task_name}</h1>
@@ -53,11 +55,15 @@ const Task = () => {
                 <button onClick={handleAccept}>Accept?</button>
                 <button onClick={handleDelete}>Delete</button>
             </div>
+          
             ))}
-
-
-        </div>
-            
+          </div>
+        ) : (
+          <script>
+          {window.location.replace("/login")}; 
+          </script>
+      )}
+      </div>   
     )
 }
 

@@ -92,14 +92,9 @@ const Profile = () => {
             </div>
             
             ) : (
-                <div className="centerElements">
-                    <Typography variant="h5" className="app__section-element">*Login using the Login button in the Navbar or the button below</Typography>
-                    <Link className="link app__section-element" to="/login">
-                        <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element">
-                            <Typography>Login</Typography>
-                        </Button>
-                    </Link>
-                </div>
+                <script>
+                {window.location.replace("/login")}; 
+                </script>
             )}
 
         </Box>

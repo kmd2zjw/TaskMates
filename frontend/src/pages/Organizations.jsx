@@ -131,84 +131,92 @@ const Organizations = () => {
   }
 
   return (
-    <div className="orgPage">
-      <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
-      <form className="addUserForm" style={{ marginTop: '24px' }}>
-        <Input
-            type="text" required
-            placeholder='User ID'
-            onChange={(e) => setUser(e.target.value)}
-        />
-        <Button
-          variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add Member
-        </Button>
-        
-      </form>
-      <div className = "centerElements">
-        <div>
-       Upload Users: <input type="file" placeholder="Upload Users" onChange={(e) => readFile(e)} />
-        </div>
-      </div>
-      <div style={{ display: 'flex', gap: '100px' }}>
-        <div style={{ flex: '1' }}>
-          <div className="centerElements">
-            <Typography variant='h3'>Tasks</Typography>
-            <Link to="./createtask">
-              <Button variant='outlined' className="app_task">New Task</Button>
-            </Link>
-            <Button variant='outlined' className="app_task" onClick={downloadTasks}>Download Tasks</Button>
-
-            <div>
-              <Button variant='outlined' className="app_task" name="all" id="all" onClick={reviseTasks}>Show All Tasks (Sorted by Date)</Button>
-              <Button variant='outlined' className="app_task" name="claimed" id="claimed" onClick={reviseTasks}>Show Claimed Tasks (Sorted by Date)</Button>
-              <Button variant='outlined' className="app_task" name="unclaimed" id="unclaimed" onClick={reviseTasks}>Show Unclaimed Tasks (Sorted by Date)</Button>
-            </div>
-          </div>
+    <div>
+    { currentUser ? (
+      <div>
+      <div className="orgPage">
+        <Typography variant='h2' style={{fontWeight: 700}}><u>{org.groupName}</u></Typography>
+        <form className="addUserForm" style={{ marginTop: '24px' }}>
+          <Input
+              type="text" required
+              placeholder='User ID'
+              onChange={(e) => setUser(e.target.value)}
+          />
+          <Button
+            variant='outlined' sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleClick}>Add Member
+          </Button>
           
-          <div className="tasks">
-            {unfiltered ? (
-              <>
-              {tasks.map((task) => (
-              <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
-                <h2>{task.task_name}</h2>
-                <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
-                <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              
-              </a>
-              ))}
-              </>
-            ) : (
-              <>
-              {filterTasks.map((task) => (
+        </form>
+        <div className = "centerElements">
+          <div>
+        Upload Users: <input type="file" placeholder="Upload Users" onChange={(e) => readFile(e)} />
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '100px' }}>
+          <div style={{ flex: '1' }}>
+            <div className="centerElements">
+              <Typography variant='h3'>Tasks</Typography>
+              <Link to="./createtask">
+                <Button variant='outlined' className="app_task">New Task</Button>
+              </Link>
+              <Button variant='outlined' className="app_task" onClick={downloadTasks}>Download Tasks</Button>
+
+              <div>
+                <Button variant='outlined' className="app_task" name="all" id="all" onClick={reviseTasks}>Show All Tasks (Sorted by Date)</Button>
+                <Button variant='outlined' className="app_task" name="claimed" id="claimed" onClick={reviseTasks}>Show Claimed Tasks (Sorted by Date)</Button>
+                <Button variant='outlined' className="app_task" name="unclaimed" id="unclaimed" onClick={reviseTasks}>Show Unclaimed Tasks (Sorted by Date)</Button>
+              </div>
+            </div>
+            
+            <div className="tasks">
+              {unfiltered ? (
+                <>
+                {tasks.map((task) => (
                 <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
                   <h2>{task.task_name}</h2>
-                  <h4 style={{ fontWeight: 'normal' }}>{task.description}</h4>
-                  <h4 style={{ fontWeight: 'normal' }}>Due: {printDate(task.due_date)}</h4>
+                  <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
+                  <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              
                 </a>
-              ))}
-              </>
-            )}
-          </div>
-        </div>
-        <div style={{ flex: '1' }}>
-          <div style={{display: 'flex', alignItems: 'center', margin: '14px 0'}}>
-            <h2>Members</h2>
-          </div>
-
-          <div className="members" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-            {members.map((member) => (
-            <div key={member.userID} onClick={ () => handleMakeAdmin(member.userID) } style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '150px', width: '150px', borderRadius: '16px', backgroundColor: 'white', boxSizing: 'border-box', boxShadow: '0 2px 4px 0px lightgray', backgroundColor: member.adminID ? 'rgb(255, 251, 237)' : 'white' }}>
-              <div style={{ height: '46px', width: '46px', boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', borderRadius: '16px', border: '1.5px solid cornflowerblue', marginBottom: '4px', marginTop: '-4px' }}>
-                <span>{ member.first_name[0] }{ member.last_name[0] }</span>
-              </div>
-              <h3 style={{ textAlign: 'center', marginTop: '2px' }}>{ member.first_name } { member.last_name }</h3>
+                ))}
+                </>
+              ) : (
+                <>
+                {filterTasks.map((task) => (
+                  <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
+                    <h2>{task.task_name}</h2>
+                    <h4 style={{ fontWeight: 'normal' }}>{task.description}</h4>
+                    <h4 style={{ fontWeight: 'normal' }}>Due: {printDate(task.due_date)}</h4>
+                  </a>
+                ))}
+                </>
+              )}
             </div>
-            ))}
+          </div>
+          <div style={{ flex: '1' }}>
+            <div style={{display: 'flex', alignItems: 'center', margin: '14px 0'}}>
+              <h2>Members</h2>
+            </div>
+
+            <div className="members" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              {members.map((member) => (
+              <div key={member.userID} onClick={ () => handleMakeAdmin(member.userID) } style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '150px', width: '150px', borderRadius: '16px', backgroundColor: 'white', boxSizing: 'border-box', boxShadow: '0 2px 4px 0px lightgray', backgroundColor: member.adminID ? 'rgb(255, 251, 237)' : 'white' }}>
+                <div style={{ height: '46px', width: '46px', boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', borderRadius: '16px', border: '1.5px solid cornflowerblue', marginBottom: '4px', marginTop: '-4px' }}>
+                  <span>{ member.first_name[0] }{ member.last_name[0] }</span>
+                </div>
+                <h3 style={{ textAlign: 'center', marginTop: '2px' }}>{ member.first_name } { member.last_name }</h3>
+              </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-
-      
-    </div>
+      </div>
+    ) : (
+    <script>
+            {window.location.replace("/login")};
+    </script>  
+  )}
+  </div>
   )
 }
 

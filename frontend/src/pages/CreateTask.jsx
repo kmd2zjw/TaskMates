@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import {AuthContext} from "../context/authContext"
+
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AppWrap } from '../wrapper';
@@ -17,6 +19,7 @@ const CreateTask = () => {
     const [name, setName] = useState(state?.name || "");
     const [description, setDescription] = useState(state?.description || "");
     const [dueDate, setDueDate] = useState(new Date());
+    const { currentUser } = useContext(AuthContext);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -35,6 +38,8 @@ const CreateTask = () => {
     };
 
     return (
+        <div>
+        {currentUser ? (
         <Box>
             <Box style={{display:"flex",
                 justifyContent:"center",
@@ -78,6 +83,12 @@ const CreateTask = () => {
                 </form>
             </Box>
         </Box>
+        ) : (
+            <script>
+            {window.location.replace("/login")};
+            </script>
+        )}
+        </div>
     )
 
 }

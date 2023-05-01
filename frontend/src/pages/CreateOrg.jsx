@@ -34,6 +34,8 @@ const CreateOrg = () => {
     };
 
     return (
+        <div>
+        { currentUser ? (
         <Box>
             <Box style={{display:"flex",
                 justifyContent:"center",
@@ -58,6 +60,12 @@ const CreateOrg = () => {
                 </form>
             </Box>
         </Box>
+        ) : (
+            <script>
+            {window.location.replace("/login")};
+            </script>
+        )}
+        </div>
     )
 }
 
