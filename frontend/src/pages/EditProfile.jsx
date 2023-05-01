@@ -40,7 +40,7 @@ const EditProfile = () => {
             //console.log(inputs)
             navigate("/profile");
         } catch (err) {
-            console.log(inputs)
+            //console.log(inputs)
             console.log(err.response.data)
             setError(err.response.data)
         }
@@ -51,38 +51,31 @@ const EditProfile = () => {
             <Typography variant="h2">Edit Profile</Typography>
             <form>
                 <Input
-                    type="text" required T
+                    type="text" required
                     placeholder='First Name'
                     className="app__form-element"
                     name="firstName"
                     onChange={handleChange}
                 />
                 <Input
-                    type="text" required T
+                    type="text" required
                     placeholder='Last Name'
                     className="app__form-element"
                     name="lastName"
                     onChange={handleChange}
                 />
                 <Input
-                    type="text" required T
+                    type="text" required
                     placeholder='Email'
                     className="app__form-element"
                     name="email"
                     onChange={handleChange}
                 />
                 <Input
-                    type="number" required T
+                    type="number" required
                     placeholder='Phone Number'
                     className="app__form-element"
                     name="phoneNumber"
-                    onChange={handleChange}
-                />
-                <Input
-                    type="text" required T
-                    placeholder='Password'
-                    className="app__form-element"
-                    name="password"
                     onChange={handleChange}
                 />
                 <Button variant='outlined' className="app__form-element" sx={{ color: '#212121', borderColor: '#212121' }} onClick={handleSubmit}>Confirm Changes</Button>
