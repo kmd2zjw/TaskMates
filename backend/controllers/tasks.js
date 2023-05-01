@@ -72,7 +72,7 @@ export const getUser = (req, res) => {
 
 export const getGroupTasks = (req, res) => {
   const q =
-    "SELECT * FROM (group_tasks NATURAL JOIN task) LEFT JOIN assigned_to ON task.taskID = assigned_to.taskID WHERE groupID = ? ";
+    "SELECT DISTINCT * FROM (group_tasks NATURAL JOIN task) LEFT JOIN assigned_to ON task.taskID = assigned_to.taskID WHERE groupID = ? ";
 
   db.query(q, [req.params.id], (err, data) => {
     if (err) return res.status(500).json(err);
