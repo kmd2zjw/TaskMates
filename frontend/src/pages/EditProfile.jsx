@@ -36,7 +36,7 @@ const EditProfile = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.put(`../auth/${currentUser}`, inputs, );
+            await axios.put(`/getUser`, {inputs} );
             //console.log(inputs)
             navigate("/profile");
         } catch (err) {

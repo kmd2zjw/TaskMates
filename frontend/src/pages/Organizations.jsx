@@ -27,7 +27,7 @@ const Organizations = () => {
       try {
         const res = await axios.get(`/orgs/${orgId}`);
         setOrg(res.data);
-        const res1 = await axios.get(`/tasks/getGroupTasks/${orgId}`);
+        const res1 = await axios.get(`/tasks/getAllGroupTasks/${orgId}`);
         setTask(res1.data);
         const groupUsers = await axios.get(`/orgs/${orgId}/getUsers`);
         setMembers(groupUsers.data);
@@ -80,7 +80,6 @@ const Organizations = () => {
     tasks.sort(function(task1, task2){
       return Number(new Date(task2.due_date)) - Number(new Date(task1.due_date));
     }).reverse();
-    console.log(tasks)
     if(e.target.id === "all"){
       setFilterTask(tasks);
     } else if(e.target.id === "claimed"){
@@ -170,6 +169,7 @@ const Organizations = () => {
               <>
               {tasks.map((task) => (
               <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
+                {task.taskID}
                 <h2>{task.task_name}</h2>
                 <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
                 <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              

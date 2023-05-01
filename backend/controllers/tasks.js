@@ -48,6 +48,21 @@ export const getUserTasks = (req, res) => {
   });
 }
 
+export const getUser = (req, res) => {
+  const token = req.cookies.access_token;
+  if (!token) return res.status(401).json("Not authenticated!");
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+    console.log("works")
+    const q = "UPDATE user where userID=?"
+    db.query(q, [userInfo.id], (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(data);
+    })
+
+  });
+}
+
 export const getGroupTasks = (req, res) => {
   const q =
     "SELECT * FROM (group_tasks NATURAL JOIN task) LEFT JOIN assigned_to ON task.taskID = assigned_to.taskID WHERE groupID = ? ";
@@ -56,6 +71,16 @@ export const getGroupTasks = (req, res) => {
     if (err) return res.status(500).json(err);
     return res.status(200).json(data);
   });
+}
+
+export const getAllGroupTasks = (req, res) =>{
+  const q =
+  "SELECT * FROM group_tasks NATURAL JOIN task WHERE groupID = ? ";
+
+db.query(q, [req.params.id], (err, data) => {
+  if (err) return res.status(500).json(err);
+  return res.status(200).json(data);
+});
 }
 
 export const acceptTask = (req, res) => {
@@ -74,20 +99,6 @@ export const acceptTask = (req, res) => {
     db.query(q, [v], (err, data) => {
       if (err) return res.status(500).json(err);
       return res.status(200).json("Task accepted");
-    })
-
-  });
-}
-
-export const getUser = (req, res) => {
-  const token = req.cookies.access_token;
-  if (!token) return res.status(401).json("Not authenticated!");
-  jwt.verify(token, "jwtkey", (err, userInfo) => {
-    if (err) return res.status(403).json("Token is not valid!");
-    const q = "SELECT * where userID=?"
-    db.query(q, [userInfo.id], (err, data) => {
-      if (err) return res.status(500).json(err);
-      return res.status(200).json(data);
     })
 
   });
