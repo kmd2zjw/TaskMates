@@ -53,13 +53,16 @@ export const getUser = (req, res) => {
   if (!token) return res.status(401).json("Not authenticated!");
   jwt.verify(token, "jwtkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
-    console.log("works")
-    const q = "UPDATE user where userID=? VALUES (?)"
+    const q = "UPDATE user SET first_name=?, last_name=?, email=?, phone_number=? WHERE userID=? "
     const v = [
-      req.params.id,
-      userInfo.id,
+      req.body.inputs.firstName,
+      req.body.inputs.lastName,
+      req.body.inputs.email,
+      req.body.inputs.phoneNumber,
+      userInfo.id
     ]
-    db.query(q, [v], (err, data) => {
+    db.query(q, v, (err, data) => {
+      console.log(err)
       if (err) return res.status(500).json(err);
       return res.status(200).json(data);
     })
