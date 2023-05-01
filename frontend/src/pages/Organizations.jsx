@@ -89,9 +89,6 @@ const Organizations = () => {
     }
   }
 
-  const sortTasks = (e) => {
-    
-  }
 
   const readFile = async (e) => { 
     e.preventDefault() 
@@ -169,7 +166,6 @@ const Organizations = () => {
               <>
               {tasks.map((task) => (
               <a href={`./${orgId}/task/${task.taskID}`} className="task" key={task.taskID}>
-                {task.taskID}
                 <h2>{task.task_name}</h2>
                 <h4 style={{fontWeight: 'normal'}}>{task.description}</h4>
                 <h4 style={{fontWeight: 'normal'}}>Due: {printDate(task.due_date)}</h4>              

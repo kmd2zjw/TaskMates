@@ -54,8 +54,12 @@ export const getUser = (req, res) => {
   jwt.verify(token, "jwtkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
     console.log("works")
-    const q = "UPDATE user where userID=?"
-    db.query(q, [userInfo.id], (err, data) => {
+    const q = "UPDATE user where userID=? VALUES (?)"
+    const v = [
+      req.params.id,
+      userInfo.id,
+    ]
+    db.query(q, [v], (err, data) => {
       if (err) return res.status(500).json(err);
       return res.status(200).json(data);
     })
@@ -75,7 +79,7 @@ export const getGroupTasks = (req, res) => {
 
 export const getAllGroupTasks = (req, res) =>{
   const q =
-  "SELECT * FROM group_tasks NATURAL JOIN task WHERE groupID = ? ";
+  "SELECT * FROM group_tasks NATURAL JOIN task NATURAL JOIN assigned_to WHERE groupID = ? ";
 
 db.query(q, [req.params.id], (err, data) => {
   if (err) return res.status(500).json(err);
@@ -117,6 +121,8 @@ export const getTask = (req, res) => {
   });
 }
 
+/* Sorted through front-end 
+
 export const getUnclaimedTasks = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authenticated!");
@@ -141,7 +147,7 @@ export const getClaimedTasks = (req, res) => {
     })
 
   });
-}
+} */
 
 export const deleteTask = (req, res) => {
   const token = req.cookies.access_token;
