@@ -5,7 +5,7 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import { Home, Login, Profile, Register, Organizations, CreateOrg, CreateTask, Task } from './pages';
+import { Home, Login, Profile, EditProfile, Register, Organizations, CreateOrg, CreateTask, Task } from './pages';
 import { Footer, Navbar } from './components';
 import './style.scss';
 /*
@@ -49,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile/>,
+  },
+  {
+    path: "/editprofile/:id",
+    element: <EditProfile/>,
   },
   {
     path: "/orgs/:id",

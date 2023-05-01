@@ -4,5 +4,6 @@ export { default as Profile } from './Profile';
 export { default as Register } from './Register';
 export { default as Organizations } from './Organizations';
 export { default as CreateOrg } from './CreateOrg';
+export { default as EditProfile } from './EditProfile';
 export {default as CreateTask} from './CreateTask';
 export {default as Task} from './Task'

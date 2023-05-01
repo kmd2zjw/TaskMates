@@ -38,7 +38,7 @@ const Profile = () => {
     }
 
     return (
-        <Box className="app__container" style={{ justifyContent: "flex-start" }}>
+        <Box className="app__container" style={{ justifyContent: "flex-start", height: 'auto' }}>
             {currentUser ? (
                 <div className="title-section">
                     <Typography variant="h2" style={{ paddingBottom: '0rem' }} className="title-text app__profile-element">{currentUser?.first_name} {currentUser?.last_name}</Typography>
@@ -79,13 +79,15 @@ const Profile = () => {
 
                     <Typography variant="h4" className="app__profile-element"><u>Phone Number:</u> {currentUser?.phone_number}</Typography>
 
-                    <Typography variant="h4" className="app__profile-element"><u>User ID:</u> {currentUser?.userID}</Typography>
-
-                    
                     <div className="centerElements">
                         <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element" onClick={logout}>
                             <Typography>Logout</Typography>
                         </Button>
+                        <a href={`/editprofile/${currentUser.userID}`}>
+                        <Button variant="outlined" sx={{ color: '#212121', borderColor: '#212121' }} className="app__section-element" >
+                            <Typography>Update Profile</Typography>
+                        </Button>
+                        </a>
                     </div>
                     
                         
