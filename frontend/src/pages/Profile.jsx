@@ -10,10 +10,11 @@ import { AuthContext } from "../context/authContext";
 import { Link, useLocation } from "react-router-dom";
 
 const Profile = () => {
+    const state = useLocation().state;
 
     const [post, setPost] = useState({});
     const { currentUser, logout } = useContext(AuthContext);
-    const state = useLocation().state;
+
     const [orgs, setOrgs] = useState([]);
     const [tasks, setTasks] = useState([]);
 
@@ -24,7 +25,6 @@ const Profile = () => {
                 setOrgs(res.data);
                 const res2 = await axios.get(`/tasks/getUserTasks`);
                 setTasks(res2.data);
-
 
             } catch (err) {
                 console.log(err);

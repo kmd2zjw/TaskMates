@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation} from "react-router-dom";
 import axios from "axios";
 import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
 import Button from "@mui/material/Button";
 const Register = () => {
 
+    const state = useLocation().state;
     const [inputs, setInputs] = useState({
         firstName: "",
         lastName: "",

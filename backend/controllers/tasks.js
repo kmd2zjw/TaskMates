@@ -82,7 +82,7 @@ export const getGroupTasks = (req, res) => {
 
 export const getAllGroupTasks = (req, res) =>{
   const q =
-  "SELECT * FROM group_tasks NATURAL JOIN task NATURAL JOIN assigned_to WHERE groupID = ? ";
+  "SELECT * FROM group_tasks NATURAL JOIN task WHERE groupID = ? ";
 
 db.query(q, [req.params.id], (err, data) => {
   if (err) return res.status(500).json(err);
